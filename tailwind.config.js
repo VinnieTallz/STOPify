@@ -5,7 +5,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}", // Add paths to your components
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        hero: "url('../public/images/DepartureStation.webp')",
+      },
+    },
   },
   plugins: [],
 }
