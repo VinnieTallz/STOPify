@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
     return (
-        <div>
+        <div className='bg-hero bg-cover bg-center bg-custom'>
         <header className="flex justify-between items-center p-4 bg-white opacity-50 shadow-md">
             <div className="text-black text-xl font-bold">
             STOPify
@@ -39,8 +39,7 @@ const Header = () => {
         </header>
 
         {/* hero section*/}
-        <main className="flex-grow flex flex-col items-center justify-center bg-hero  bg-cover bg-center h-80" 
-        > 
+        <main className="flex-grow flex flex-col items-center justify-center   h-80"> 
 
         <div className="text-center  p-6 rounded-lg">
         <h2 className="text-3xl font-semibold mb-4">STOPify</h2>
