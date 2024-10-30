@@ -10,8 +10,11 @@ const TransitInfo = () => {
                 <li>Service alerts and updates</li>
                 <li>Route planning assistance</li>
             </ul>
+            
         </div>
     );
 };
 
 export default TransitInfo;
+
+

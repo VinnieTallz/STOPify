@@ -9,7 +9,7 @@ import './index.css';
 const App = () => {
     return (
         <div className="flex flex-col min-h-screen">
-            <Header />
+        <Header/>
             <main className="flex-grow p-4">
                 <Main />
             </main>
