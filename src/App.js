@@ -13,7 +13,7 @@ const App = () => {
             <main className="flex-grow p-4">
 
             <Main />
-            <TransitInfo />
+          
             </main>
             <Footer />
         </div> 
