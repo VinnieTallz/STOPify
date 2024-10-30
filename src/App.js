@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
-import TransitInfo from './TransitInfo';
+import Header from './components/Header';
+import Main from './components/Main';
+import Footer from './components/Footer';
+import TransitInfo from './components/TransitInfo';
 import './index.css'; 
 
 
@@ -13,7 +13,7 @@ const App = () => {
             <main className="flex-grow p-4">
 
             <Main />
-            <TransitInfo />
+          
             </main>
             <Footer />
         </div> 
