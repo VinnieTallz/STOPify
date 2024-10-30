@@ -6,12 +6,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        hero: "url('../public/images/DepartureStation.webp')",
-      },
-      backgroundOpacity: {
-        'custom': '0.75' // Example: 75% opacity
-      }
     },
   },
   plugins: [],

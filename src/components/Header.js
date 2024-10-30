@@ -2,7 +2,8 @@ import React from 'react';
 
 const Header = () => {
     return (
-        <div className='bg-hero bg-cover bg-center bg-custom'>
+        <div>
+        <div className='bg-cover bg-center opacity-75' style={{backgroundImage: `url('images/DepartureStation.webp')`}}> 
         <header className="flex justify-between items-center p-4 bg-white opacity-50 shadow-md">
             <div className="text-black text-xl font-bold">
             STOPify
@@ -39,11 +40,10 @@ const Header = () => {
         </header>
 
         {/* hero section*/}
-        <main className="flex-grow flex flex-col items-center justify-center   h-80"> 
-
+        <main className="flex-grow flex flex-col items-center justify-center h-80"> 
         <div className="text-center  p-6 rounded-lg">
-        <h2 className="text-3xl font-semibold mb-4">STOPify</h2>
-        <p className="mb-6">Find what you're looking for:</p>
+        <h2 className=" text-black text-3xl font-semibold mb-4">STOPify</h2>
+        <p className="mb-6 font-semibold">Find what you're looking for:</p>
         <div className="flex justify-center">      
             <input
             type="text"
@@ -56,8 +56,8 @@ const Header = () => {
         </div>
         </div>
     </main>
-
     </div>
+    </div>    
 );
 };
 

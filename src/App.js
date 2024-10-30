@@ -2,8 +2,8 @@ import React from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
-import TransitInfo from './components/TransitInfo';
 import './index.css'; 
+
 
 
 const App = () => {
@@ -11,9 +11,7 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
             <Header />
             <main className="flex-grow p-4">
-
-            <Main />
-          
+                <Main />
             </main>
             <Footer />
         </div> 
