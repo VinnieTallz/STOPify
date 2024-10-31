@@ -8,7 +8,7 @@ const MainMap = () => {
         <div className="flex h-96">
           <div className='w-1/3 p-4'>
               <div className='flex'>
-                  <img src='/images/location.svg' style={{ width: '30px' }}/>
+                  <img src='/images/bustop_blue.png' style={{ width: '30px' }}/>
                   <h2 className="text-black text-3xl text-center font-bold">STOPify</h2>
               </div>
               
