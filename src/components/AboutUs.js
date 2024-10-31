@@ -2,18 +2,18 @@ import React from 'react';
 
   const About = () => {
     return (
-        <div class="sm:flex items-center max-w-screen-xl">
-            <div class="sm:w-1/2 p-10">
-                <div class="image object-center text-center">
+        <div className="sm:flex items-center max-w-screen-xl">
+            <div className="sm:w-1/2 p-10">
+                <div className="image object-center text-center">
                     <img src="https://i.imgur.com/WbQnbas.png"/>
                 </div>
             </div>
-            <div class="sm:w-1/2 p-5">
-                <div class="text">
-                    <span class="text-gray-500 border-b-2 border-blue-600 uppercase">About us</span>
-                    <h2 class="my-4 font-bold text-3xl  sm:text-4xl ">About <span class="text-blue-500">Our Company</span>
+            <div className="sm:w-1/2 p-5">
+                <div className="text">
+                    <span className="text-gray-500 border-b-2 border-blue-600 uppercase">About us</span>
+                    <h2 className="my-4 font-bold text-3xl  sm:text-4xl ">About <span className="text-blue-500">Our Company</span>
                     </h2>
-                    <p class="text-gray-700">
+                    <p className="text-gray-700">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, commodi
                         doloremque, fugiat illum magni minus nisi nulla numquam obcaecati placeat quia, repellat tempore
                         voluptatum.
