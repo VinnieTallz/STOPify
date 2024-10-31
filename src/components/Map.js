@@ -16,7 +16,7 @@ const MainMap = () => {
                 <input
                     type="text"
                     placeholder="Search your bus..."
-                    className="border border-gray-300 rounded-full p-2 m-5 w-full md:w-80" 
+                    className="border border-gray-300 rounded-full p-2 m-4 w-full md:w-80" 
                 />
             </div>
     
