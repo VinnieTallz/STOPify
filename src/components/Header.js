@@ -87,15 +87,7 @@ const Header = () => {
         {/* Main Content Section */}
         <main className="flex-grow flex flex-col items-center justify-center h-80">
           <div className="text-center p-6 rounded-lg">
-            <h2 className="text-black text-3xl font-semibold mb-4">STOPify</h2>
-            <p className="mb-6 font-semibold">Find what you're looking for:</p>
-            <div className="flex justify-center">
-              <input
-                type="text"
-                placeholder="Search your bus..."
-                className="border border-gray-300 rounded-full p-2 w-80"
-              />
-            </div>
+      
           </div>
         </main>
       </div>
