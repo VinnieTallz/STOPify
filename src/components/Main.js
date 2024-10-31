@@ -1,6 +1,8 @@
 import React from 'react';
 import Map from './Map';
 import TransitInfo from './TransitInfo';
+import About from './AboutUs';
+import Contact from './ContactUs';
 
 const Main = () => {
     return (
@@ -10,7 +12,9 @@ const Main = () => {
                     <Map />
                 </div>
                 <div className="col-lg-4">
-                    <TransitInfo />
+                    {/* <TransitInfo /> */}
+                    <About/>
+                    <Contact/>
                 </div>
             </div>
         </div>
