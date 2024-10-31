@@ -24,7 +24,7 @@ const MainMap = () => {
 
               </div>
           </div>
-          <div className='w-2/3 p-4'>
+          <div className='w-2/3'>
           <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log('Maps API has loaded.')}>
                     <Map
                         defaultZoom={13}
