@@ -17,7 +17,7 @@ const MainMap = () => {
           (error) => {
             console.error("Error getting user location:", error);
             // Set a default location if geolocation fails
-            setUserLocation({ lat: -33.860664, lng: 151.208138 }); 
+            setUserLocation({ lat: 51.0447, lng: -114.0719 }); 
           }
         );
       } //else {
