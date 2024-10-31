@@ -11,14 +11,12 @@ const MainMap = () => {
                 <img src='/images/bustop_blue.png' style={{ width: '30px' }} alt="Bus Stop Icon" />
                 <h2 className="text-black text-2xl md:text-3xl text-center font-bold ml-2">STOPify</h2>
             </div>
-    
-            <div>
+
                 <input
                     type="text"
                     placeholder="Search your bus..."
-                    className="border border-gray-300 rounded-full p-2 m-4 w-full md:w-80" 
+                    className="border border-gray-300 rounded-full p-2 my-4 w-full" 
                 />
-            </div>
     
             <div>
                 <Card />
