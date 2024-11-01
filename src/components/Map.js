@@ -6,7 +6,6 @@ const MainMap = () => {
 
   useEffect(() => {
     const fetchUserLocation = () => {
-      if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             setUserLocation({
@@ -20,11 +19,6 @@ const MainMap = () => {
             setUserLocation({ lat: 51.0447, lng: -114.0719 }); 
           }
         );
-      } //else {
-        //console.error("Geolocation is not supported by this browser.");
-        // Set a default location if geolocation is not supported
-        //setUserLocation({ lat: -33.860664, lng: 151.208138 }); 
-      //}
     };
 
     fetchUserLocation();
@@ -32,11 +26,11 @@ const MainMap = () => {
 
   return (
     <div className="flex justify-center items-center h-96 bg-gray-200">
-      <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log('Maps API has loaded.')}>
-        {userLocation && ( // Conditionally render the map when userLocation is available
+      <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log('Map API has loaded.')}>
+        {userLocation && ( // Render the map when userLocation is available
           <Map
             defaultZoom={16}
-            defaultCenter={userLocation} // Use userLocation for defaultCenter
+            defaultCenter={userLocation}
           >
           </Map>
         )}
