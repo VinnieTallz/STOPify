@@ -46,13 +46,14 @@ const Header = () => {
             <ul className="flex space-x-6">
               {['Home', 'Contact Us', 'About Us', 'Login', 'Sign Up'].map((item) => (
                 <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase().replace(' ', '')}`}
-                    className="text-black hover:underline transition duration-200"
-                  >
+            <span className="text-black border-b-2 border-transparent hover:border-red-500 transition duration-200 relative inline-block">
+            <span className="absolute left-0 right-0 bottom-0 border-b-2 border-red-500 opacity-0 hover:opacity-100 transition duration-200" />
+                  <a href={`#${item.toLowerCase().replace(' ', '')}`}>
                     {item}
                   </a>
+            </span>
                 </li>
+                
               ))}
             </ul>
           </nav>
@@ -72,12 +73,14 @@ const Header = () => {
             <ul className="flex flex-col space-y-4">
               {['Home', 'Contact Us', 'About Us', 'Login', 'Sign Up'].map((item) => (
                 <li key={item}>
+                    <span className="text-black border-b-2 border-transparent hover:border-red-500 transition duration-200 relative inline-block">
+                    <span className="absolute left-0 right-0 bottom-0 border-b-2 border-red-500 opacity-0 hover:opacity-100 transition duration-200" />
                   <a
                     href={`#${item.toLowerCase().replace(' ', '')}`}
-                    className="text-black hover:underline transition duration-200"
                   >
                     {item}
                   </a>
+                  </span>
                 </li>
               ))}
             </ul>
