@@ -28,9 +28,7 @@ const MainMap = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center h-96 bg-gray-200">
-    
-    <div className="flex flex-col md:flex-row h-auto">
+    <div className="flex flex-col md:flex-row h-auto md:h-96">
         <div className='w-full md:w-1/3 p-4'>
             <div className='flex items-center'>
                 <img src='/images/bustop_blue.png' style={{ width: '30px' }} alt="Bus Stop Icon" />
@@ -48,10 +46,11 @@ const MainMap = () => {
             </div>
         </div>
 
-        <div className='w-full'>
+        <div className='w-full md:w-2/3'>
         <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log('Map API has loaded.')}>
         {userLocation && ( // Render the map when userLocation is available
           <Map
+          className="rounded-lg overflow-hidden h-96 w-full"
             defaultZoom={16}
             defaultCenter={userLocation}
           >
@@ -60,7 +59,7 @@ const MainMap = () => {
       </APIProvider>
        
         </div>     
-    </div>
+ 
   </div>
   );
 };
