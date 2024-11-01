@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Card = () => {
-    const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+    const items = ['Bus 1', 'Bus 2', 'Bus 3', 'Bus 4'];
 
     return (
         <div className="h-64 w-90 border border-gray-300 rounded-lg p-2 overflow-hidden">
