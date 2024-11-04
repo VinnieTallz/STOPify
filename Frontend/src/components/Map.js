@@ -29,19 +29,25 @@ const MainMap = () => {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row h-auto md:h-96">
-        <div className='w-full md:w-1/3 p-4'>
-            <div className='flex items-center'>
-                <img src='/images/bustop_blue.png' style={{ width: '30px' }} alt="Bus Stop Icon" />
-                <h2 className="text-black text-2xl md:text-3xl text-center font-bold ml-2">STOPify</h2>
-            </div>
+  <div className="flex flex-col md:flex-row h-auto md:h-full ">
+      
+    <div className="flex flex-col w-full max-w-xs mx-auto">
+      <div className="flex items-center mb-4">
+        <img src="/images/bustop_blue.png" style={{ width: '30px' }} alt="Bus Stop Icon" />
+        <h2 className="text-black text-2xl md:text-3xl font-bold ml-2">STOPify</h2>
+      </div>
+      <input
+        type="text"
+        placeholder="Search your bus..."
+        className="border border-gray-300 rounded-full p-2 w-full focus:outline-none focus:ring-2 focus:ring-sky-500"
+      />
+      <div className="mt-4">
+        <Card />
+      </div>
+    </div>
 
-                <input
-                    type="text"
-                    placeholder="Search your bus..."
-                    className="border border-gray-300 rounded-full p-2 my-4 w-full" 
-                />
     
+<<<<<<< HEAD
             <div>
                 <Card/>
             </div>
@@ -51,8 +57,14 @@ const MainMap = () => {
         <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log("API Loaded")}>
         {userLocation && ( // Render the map when userLocation is available
           
+=======
+    <div className="w-full md:w-2/3 ">
+        <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log(process.env.REACT_APP_MAP_ID)}>
+        {userLocation && ( // Render the map when userLocation is available
+          <div className="rounded-lg overflow-hidden w-full h-64 md:h-full">
+>>>>>>> 87b38ea37c05226fc22dbbb4eca603ef869f7bf2
           <Map
-          className="rounded-lg overflow-hidden h-96 w-full"
+            className="w-full h-full"
             defaultZoom={15}
             defaultCenter={userLocation}
             mapId={'ae7d99c514aec5fc'}
@@ -70,11 +82,11 @@ const MainMap = () => {
            <StopMarkers></StopMarkers>
 
           </Map>
+        </div>
         )}
       </APIProvider>
-       
-        </div>     
- 
+        </div>  
+
   </div>
   );
 };

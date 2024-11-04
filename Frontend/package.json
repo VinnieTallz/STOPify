@@ -43,6 +43,11 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
+<<<<<<< HEAD
     "@babel/plugin-proposal-private-property-in-object" :"^7.21.11"
+=======
+    "@babel/plugin-proposal-private-property-in-object" :"^0.0.1",
+    "@fortawesome/fontawesome-free": "^6.6.0"
+>>>>>>> 87b38ea37c05226fc22dbbb4eca603ef869f7bf2
   }
 }
