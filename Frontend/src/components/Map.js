@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import Card from './Card';
+import StopMarkers from './StopMarkers';
 
 import { APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
-//import userLocationIcon from '../Proj2/c13-project2-team4/Frontend/public/userLocationIcon.png';
 
 const MainMap = () => {
   const [userLocation, setUserLocation] = useState(null);
@@ -48,8 +48,9 @@ const MainMap = () => {
         </div>
 
         <div className='w-full md:w-2/3'>
-        <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log(process.env.REACT_APP_MAP_ID)}>
+        <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log("API Loaded")}>
         {userLocation && ( // Render the map when userLocation is available
+          
           <Map
           className="rounded-lg overflow-hidden h-96 w-full"
             defaultZoom={15}
@@ -65,6 +66,9 @@ const MainMap = () => {
             <AdvancedMarker position={userLocation}>
             <img src="userLocationIcon.png" alt="User Location Icon" width={28} height={33} />
             </AdvancedMarker>
+            
+           <StopMarkers></StopMarkers>
+
           </Map>
         )}
       </APIProvider>
