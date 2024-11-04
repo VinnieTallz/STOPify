@@ -2,12 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-<<<<<<< HEAD
 //import reportWebVitals from './reportWebVitals';
-=======
-import reportWebVitals from './reportWebVitals';
-import '@fortawesome/fontawesome-free/css/all.min.css';
->>>>>>> 87b38ea37c05226fc22dbbb4eca603ef869f7bf2
 <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet"></link>
 
 

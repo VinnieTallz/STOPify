@@ -47,22 +47,10 @@ const MainMap = () => {
     </div>
 
     
-<<<<<<< HEAD
-            <div>
-                <Card/>
-            </div>
-        </div>
-
-        <div className='w-full md:w-2/3'>
-        <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log("API Loaded")}>
-        {userLocation && ( // Render the map when userLocation is available
-          
-=======
     <div className="w-full md:w-2/3 ">
         <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log(process.env.REACT_APP_MAP_ID)}>
         {userLocation && ( // Render the map when userLocation is available
           <div className="rounded-lg overflow-hidden w-full h-64 md:h-full">
->>>>>>> 87b38ea37c05226fc22dbbb4eca603ef869f7bf2
           <Map
             className="w-full h-full"
             defaultZoom={15}
