@@ -3,7 +3,7 @@
 # dependencies
 node_modules
 Frontend/.pnp
-.pnp.js
+.pnp.jsfs
 
 # testing
 Frontend/coverage

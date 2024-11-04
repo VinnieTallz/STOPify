@@ -8,8 +8,12 @@ const Header = () => {
 
   return (
     <div>
+      
         <header className="flex justify-between items-center p-4 bg-sky-500 opacity-90 shadow-md sticky top-0 z-50">
-          <div className="text-white text-xl font-bold">STOPify</div>
+          <div className='flex items-center'>
+          <img src='/images/bustop_white.webp' style={{ width: '20px' }} alt="Bus Stop Icon" />
+          <div className="text-white text-xl md:text-2xl text-center ml-2 font-bold stopify-title">STOPify</div>
+          </div>
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden focus:outline-none"
