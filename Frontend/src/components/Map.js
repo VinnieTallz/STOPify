@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
 import Card from './Card';
+import StopMarkers from './StopMarkers';
 
 import { APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
-//import userLocationIcon from '../Proj2/c13-project2-team4/Frontend/public/userLocationIcon.png';
 
 const MainMap = () => {
   const [userLocation, setUserLocation] = useState(null);
@@ -34,7 +33,7 @@ const MainMap = () => {
     <div className="flex flex-col w-full max-w-xs mx-auto">
       <div className="flex items-center mb-4">
         <img src="/images/bustop_blue.png" style={{ width: '30px' }} alt="Bus Stop Icon" />
-        <h2 className="text-black text-2xl md:text-3xl font-bold ml-2">STOPify</h2>
+        <h2 className="text-black text-2xl md:text-3xl font-bold ml-2 stopify-title">STOPify</h2>
       </div>
       <input
         type="text"
@@ -48,8 +47,8 @@ const MainMap = () => {
 
     
     <div className="w-full md:w-2/3 ">
-        <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log(process.env.REACT_APP_MAP_ID)}>
-        {userLocation && ( // Render the map when userLocation is available
+    <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log("API Loaded")}>
+    {userLocation && ( // Render the map when userLocation is available
           <div className="rounded-lg overflow-hidden w-full h-64 md:h-full">
           <Map
             className="w-full h-full"
@@ -66,6 +65,9 @@ const MainMap = () => {
             <AdvancedMarker position={userLocation}>
             <img src="userLocationIcon.png" alt="User Location Icon" width={28} height={33} />
             </AdvancedMarker>
+            
+          <StopMarkers></StopMarkers>
+
           </Map>
         </div>
         )}
