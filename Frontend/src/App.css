@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
+
+.stopify-title {
+  font-family: "Racing Sans One", cursive;
+  font-weight: 400;
+  font-style: normal;
+}

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import Card from './Card';
 import StopMarkers from './StopMarkers';
 
@@ -33,7 +32,7 @@ const MainMap = () => {
         <div className='w-full md:w-1/3 p-4'>
             <div className='flex items-center'>
                 <img src='/images/bustop_blue.png' style={{ width: '30px' }} alt="Bus Stop Icon" />
-                <h2 className="text-black text-2xl md:text-3xl text-center font-bold ml-2">STOPify</h2>
+                <h2 className="text-black text-2xl md:text-3xl text-center font-bold ml-2 stopify-title">STOPify</h2>
             </div>
 
                 <input
