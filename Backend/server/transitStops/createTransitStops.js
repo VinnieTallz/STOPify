@@ -1,8 +1,8 @@
 import { disconnectDb } from "../db.js";
-import { createTransitRoute } from "./TransitRouteData.js";
+import { createTransitStop } from "./transitStopData.js";
 
 if (process.argv.length < 4) {
-    console.log('Usage: node createTransitRoute <name> <lon,lat> [address]')
+    console.log('Usage: node createTransitStop <name> <lon,lat> [address]')
     process.exit(1)
 }
 
@@ -18,9 +18,9 @@ const location = {
 
 const address = process.argv[4]
 
-await createTransitRoute({
-    name,
+await createTransitStop({
+    stop_number,
+    address,
     location,
-    address
 })
 await disconnectDb()

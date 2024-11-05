@@ -1,7 +1,9 @@
 import { MongoClient } from "mongodb";
+import dotenv from 'dotenv'
+dotenv.config()
 
-const mongo_uri = process.env.MONGO_URI || 'mongodb://localhost:27017/CalgaryTransit'
-
+const mongo_uri = process.env.MONGO_URI
+console.log(mongo_uri)
 let client = null  // start disconnected
 
 export async function db() {
@@ -23,3 +25,5 @@ export async function disconnectDb() {
         client = null
     }
 }
+
+
