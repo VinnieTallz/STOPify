@@ -1,0 +1,67 @@
+// library points [-114.05493630955618, 51.04545166961783]
+// (const: 0.55km area radius; 6378.1 radius of the earth)
+
+//$geoWithin -- show points within a specific area
+db.transitStops.find ({ location: {$geoWithin: { $centerSphere: [[ -114.05493630955618, 51.04545166961783], 0.5 / 6378.1]}}})
+
+// $geoNear - shows locations in order from nearest to farthest away
+db.transitStops.find ({ location: {$geoNear: { $centerSphere: [[ -114.05493630955618, 51.04545166961783], 0.5 / 6378.1]}}})
+
+
+// $geoIntersects -- shows the intersection of a point within a geometry
+db.neighborhoods.findOne({ geometry: { $geoIntersects: { $geometry: { type: "Point", coordinates: [ -114.05493630955618, 51.04545166961783]}}}})
+
+
+
+/////
+db.transitStops.features.forEach((feature) => {
+    const telerideNumber = feature.properties.teleride_number;
+    const stopName = feature.properties.stop_name;
+    const [longitude, latitude] = feature.geometry.coordinates;
+  
+    console.log(`Teleride Number: ${telerideNumber}`);
+    console.log(`Stop Name: ${stopName}`);
+    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+  });
+
+db.transitStops.find({ feature.geometry: 
+    $nearSphere: {
+        $geometry: {
+            type : "Point",
+            coordinates : [ <-114.05493630955618>, <51.04545166961783> ]
+        },
+        // $minDistance: <distance in meters>,
+        $maxDistance: <500>
+    }
+    })
+
+
+    db.transitStops.find()
+
+              
+
+
+
+
+function calculateDistance() {
+    // Define two LatLng points
+    const pointA = new google.maps.LatLng(51.0454, -114.0550); // Calgary Library
+    const pointB = new google.maps.LatLng(51.0454488, -114.0554942);  // Stop 2653
+    const pointC = new google.maps.LatLng(51.046354, -114.0567195);  // Stop 6822
+
+    // Calculate the distance in meters
+    const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(
+      pointA,
+      pointB
+    );
+
+    // Convert to kilometers if desired
+    const distanceInKilometers = distanceInMeters / 1000;
+
+    console.log("Distance in meters:", distanceInMeters);
+    console.log("Distance in kilometers:", distanceInKilometers);
+
+    // Display result on the web page
+    document.getElementById("distance").innerText =
+      "Distance: " + distanceInKilometers.toFixed(2) + " km";
+  }
