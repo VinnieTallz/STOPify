@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import StopMarkers from './StopMarkers';
+import UserLocation from './UserLocation';
 
 import { APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
 
@@ -72,6 +73,7 @@ const MainMap = () => {
         </div>
         )}
       </APIProvider>
+      <UserLocation />)
         </div>  
 
   </div>
