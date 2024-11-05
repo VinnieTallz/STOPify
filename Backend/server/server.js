@@ -1,6 +1,7 @@
 import express from 'express'
 import showRequests from './showRequests.js'
-import TransitRouteController from './transitRoute/TransitRouteController.js'
+// import transitRouteController from './transitRoute/transitRouteController.js'
+import transitStopController from './transitStops/transitStopController.js'
 
 import { disconnectDb } from './db.js'
 
@@ -11,7 +12,8 @@ app.use(showRequests)
 app.use(express.static('../public_html'))
 app.use(express.json())
 
-app.use('/api/transitRoute', TransitRouteController)
+// app.use('/api/transitRoute', transitRouteController)
+app.use('/api/transitStops', transitStopController)
 
 const server = app.listen(port, () => {
     console.log('Server listening on port ' + port)
