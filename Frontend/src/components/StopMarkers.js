@@ -1,8 +1,15 @@
 import React from 'react';
+<<<<<<< HEAD
 import fetchData from './testDataStops';
+=======
+>>>>>>> 8eb5d2273325203a86a0a2c8b4f7a101cd22bf51
 import { AdvancedMarker } from '@vis.gl/react-google-maps';
 
+const StopMarkers = ({ testDataStops }) => {
+  // Make sure testDataStops is an array and handle cases where it might not be
+  const markers = Array.isArray(testDataStops) ? testDataStops : [];
 
+<<<<<<< HEAD
 const StopMarkers = () => {
 
   const fetchData = async () => {
@@ -38,13 +45,16 @@ fetchData();
   console.log("Stop data: " + testDataStops)
   fetchData()
   return testDataStops.map((marker, index) => (
+=======
+  return markers.map((marker, index) => (
+>>>>>>> 8eb5d2273325203a86a0a2c8b4f7a101cd22bf51
     <AdvancedMarker
-      key={index} // Important: Add a unique key for each marker
+      key={index}
       position={{ lat: marker[1], lng: marker[0] }}
     >
       <img
         src="/images/bustop_blue.webp"
-        alt="User Location Icon"
+        alt="Bus Stop Icon"
         width={28}
         height={33}
       />
@@ -52,5 +62,4 @@ fetchData();
   ));
 };
 
-  
-  export default StopMarkers;
+export default StopMarkers;
