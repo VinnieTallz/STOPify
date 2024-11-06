@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 import dotenv from 'dotenv'
 dotenv.config()
 
-const mongo_uri = process.env.MONGO_URI
+const mongo_uri = "mongodb://localhost:27017/"
 console.log(mongo_uri)
 let client = null  // start disconnected
 

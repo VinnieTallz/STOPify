@@ -1,7 +1,8 @@
 import { collection, disconnectDb } from '../db.js'
 
+
 // fetch JSON data
-const response = await fetch('https://data.calgary.ca/resource/muzh-c9qc.json?$query=SELECT%20%60teleride_number%60%2C%20%60stop_name%60%2C%20%60status%60%2C%20%60globalid%60%2C%20%60point%60')
+const response = await fetch('https://data.calgary.ca/resource/muzh-c9qc.json?$offset=8000')
 if (response.status!==200) {
     throw new Error('Request to data.calgary.ca failed')
 }

@@ -24,7 +24,7 @@ const UserLocation = () => {
     }, []);
 
         return ( 
-            console.log(userLocation)
+            null
         )
 }
 

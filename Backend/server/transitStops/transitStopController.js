@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createTransitStop, findAllTransitStopCoordinates, findTransitStopById } from "./transitStopData.js";
+import { createTransitStop, findAllTransitStopCoordinates, findAllTransitStops } from "./transitStopData.js";
 
 const router = Router()
 
@@ -25,8 +25,7 @@ router.get('/:transitStopId', async function (req, res) {
 // list all transitStops
 router.get('/', async function (req, res) {
     try {
-        console.log('name is', req.query.stop_number)
-        const transitStops = await findAllTransitStopCoordinates(req.query.stop_number)
+        const transitStops = await findAllTransitStops()
         res.send(transitStops)
     }
     catch (error) {
