@@ -29,25 +29,18 @@ const MainMap = () => {
   }, []);
 
   return (
-  <div className="flex flex-col md:flex-row h-auto md:h-full ">
-      
-    <div className="flex flex-col w-full max-w-xs mx-auto">
-      <div className="flex items-center mb-4">
-        <img src="/images/bustop_blue.png" style={{ width: '30px' }} alt="Bus Stop Icon" />
-        <h2 className="text-black text-2xl md:text-3xl font-bold ml-2 stopify-title">STOPify</h2>
-      </div>
-      <input
+    <div>
+    <input
         type="text"
         placeholder="Search your bus..."
-        className="border border-gray-300 rounded-full p-2 w-full focus:outline-none focus:ring-2 focus:ring-sky-500"
+        className="shadow-md rounded-lg p-2 mb-5 w-full focus:outline-none focus:ring-2 focus:ring-sky-500"
       />
-      <div className="mt-4">
-        <BustStopList />
-      </div>
+  
+  <div className='flex flex-row'>
+    <div className="flex flex-col w-full shadow-lg sm:w-1/2 ">
+                <BustStopList />
     </div>
-
-    
-    <div className="w-full md:w-2/3 ">
+    <div className="flex flex-col md:flex-row h-auto md:h-96 w-full md:w-2/3 bg-green-400 ">
     <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log("API Loaded")}>
     {userLocation && ( // Render the map when userLocation is available
           <div className="rounded-lg overflow-hidden w-full h-64 md:h-full">
@@ -74,9 +67,14 @@ const MainMap = () => {
         )}
       </APIProvider>
       <UserLocation />
+    </div>
+  
+    </div>
+  
         </div>  
 
-  </div>
+
+
   );
 };
 
