@@ -1,17 +1,18 @@
 import React from 'react';
-import coordinatesArray from './testDataStops';
 import { AdvancedMarker } from '@vis.gl/react-google-maps';
 
+const StopMarkers = ({ testDataStops }) => {
+  // Make sure testDataStops is an array and handle cases where it might not be
+  const markers = Array.isArray(testDataStops) ? testDataStops : [];
 
-const StopMarkers = () => {
-  return testDataStops.map((marker, index) => (
+  return markers.map((marker, index) => (
     <AdvancedMarker
-      key={index} // Important: Add a unique key for each marker
+      key={index}
       position={{ lat: marker[1], lng: marker[0] }}
     >
       <img
         src="/images/bustop_blue.webp"
-        alt="User Location Icon"
+        alt="Bus Stop Icon"
         width={28}
         height={33}
       />
@@ -19,5 +20,4 @@ const StopMarkers = () => {
   ));
 };
 
-  
-  export default StopMarkers;
+export default StopMarkers;
