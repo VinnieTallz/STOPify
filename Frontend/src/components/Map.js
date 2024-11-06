@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Card from './Card';
+import BustStopList from './BusStopList';
 import StopMarkers from './StopMarkers';
 import UserLocation from './UserLocation';
 
@@ -42,7 +42,7 @@ const MainMap = () => {
         className="border border-gray-300 rounded-full p-2 w-full focus:outline-none focus:ring-2 focus:ring-sky-500"
       />
       <div className="mt-4">
-        <Card />
+        <BustStopList />
       </div>
     </div>
 
@@ -73,7 +73,7 @@ const MainMap = () => {
         </div>
         )}
       </APIProvider>
-      <UserLocation />)
+      <UserLocation />
         </div>  
 
   </div>
