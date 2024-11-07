@@ -12,7 +12,7 @@ const BusStopList = () => {
       const radius = 5000; // Set the radius for nearby bus stops (in meters)
       try {
         const response = await fetch(
-          `http://localhost:3000/api/transitStops/nearby?lat=${lat}&lng=${lng}&radius=${radius}`
+          `http://localhost:4000/api/transitStops/nearby?lat=${lat}&lng=${lng}&radius=${radius}`
         );
         
         if (response.status === 200) {
@@ -54,11 +54,11 @@ const BusStopList = () => {
 
   // Render loading, error, or bus stops
   if (loading) {
-    return <div>Loading your location and bus stops...</div>;
+    return <div>{JSON.stringify('Loading your location and bus StopMarkers..')}</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div>{error.message || JSON.stringify(error)}</div>;
   }
 
   return (

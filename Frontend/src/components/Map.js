@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import BustStopList from './BusStopList';
-import StopMarkers from './StopMarkers';
-import UserLocation from './UserLocation';
+import BustStopList from './BusStopList.js';
+import StopMarkers from './StopMarkers.js';
+import UserLocation from './UserLocation.js';
 
 import { APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
 

@@ -4,7 +4,7 @@ const fetchData = async () => {
     let testDataStops = [];
 
   try {
-    const response = await fetch('http://localhost:3000/api/transitStops');
+    const response = await fetch('http://localhost:4000/api/transitStops');
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
