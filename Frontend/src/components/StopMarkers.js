@@ -25,7 +25,7 @@ const StopMarkers = () => {
   return testDataStops.map((marker, index) =>
     <AdvancedMarker
       key={index} // Important: Add a unique key for each marker
-      position={{ lat: marker[0], lng: marker[1] }}
+      position={{ lat: marker[1], lng: marker[0] }}
     >
       <img
         src="/images/bustop_blue.webp"
