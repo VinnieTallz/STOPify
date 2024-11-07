@@ -12,8 +12,8 @@ const Main = () => {
                 </div>
                 <div className="col-lg-4">
                     {/* <TransitInfo /> */}
-                    <About/>
-                    <Contact/>
+                    <About />
+                    <Contact />
                 </div>
             </div>
         </div>
