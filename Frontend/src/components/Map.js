@@ -29,14 +29,19 @@ const MainMap = () => {
     <div>
       {userLocation ? (
         <>
-          <div className="flex flex-row">
+          <input
+            type="text"
+            placeholder="Search your bus..."
+            className="shadow-md rounded-lg p-2 mb-5 w-full focus:outline-none focus:ring-2 focus:ring-sky-500"
+          />
+          <div className="flex flex-col-reverse h-[600px] max-h-screen sm:flex-row">
             <div className="flex flex-col w-full shadow-lg sm:w-1/2">
               {/* Optionally display a list of stops */}
             </div>
-            <div className="flex flex-col md:flex-row h-auto md:h-96 w-full md:w-2/3 bg-green-400">
+            <div className="flex flex-col md:flex-row h-full w-full md:w-2/3 shadow-lg">
               <APIProvider apiKey={apiKey} onLoad={() => console.log('API Loaded')}>
                 {userLocation && (
-                  <div className="rounded-lg overflow-hidden w-full h-64 md:h-full">
+                  <div className="rounded-lg overflow-hidden w-full h-full ">
                     <Map
                       className="w-full h-full"
                       defaultZoom={15}
