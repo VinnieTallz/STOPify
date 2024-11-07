@@ -1,65 +1,40 @@
-import React from 'react';
-<<<<<<< HEAD
-import fetchData from './testDataStops';
-=======
->>>>>>> 8eb5d2273325203a86a0a2c8b4f7a101cd22bf51
-import { AdvancedMarker } from '@vis.gl/react-google-maps';
+import React, { useState, useEffect } from "react";
+import { AdvancedMarker } from "@vis.gl/react-google-maps";
 
-const StopMarkers = ({ testDataStops }) => {
-  // Make sure testDataStops is an array and handle cases where it might not be
-  const markers = Array.isArray(testDataStops) ? testDataStops : [];
-
-<<<<<<< HEAD
 const StopMarkers = () => {
+  let [testDataStops, settestDataStops] = useState([]);
+  useEffect(() => {
+    const fetchStops = async () => {
+      try {
+        const response = await fetch("/api/transitStops");
 
-  const fetchData = async () => {
-    let testDataStops = [];
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-  try {
-    const response = await fetch('http://localhost:3000/api/transitStops');
+        const data = await response.json();
+        settestDataStops(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchStops();
+  }, []);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    // Extract coordinates and push into testDataStops
-    data.forEach(stop => {
-      testDataStops.push(stop.location.coordinates);
-    });
-
-    console.log(testDataStops); // Log the array of coordinates
-
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-  return testDataStops;
-};
-
-fetchData();
-
-
-
-  let testDataStops = []
-  console.log("Stop data: " + testDataStops)
-  fetchData()
-  return testDataStops.map((marker, index) => (
-=======
-  return markers.map((marker, index) => (
->>>>>>> 8eb5d2273325203a86a0a2c8b4f7a101cd22bf51
+  console.log(testDataStops);
+  return testDataStops.map((marker, index) =>
     <AdvancedMarker
-      key={index}
-      position={{ lat: marker[1], lng: marker[0] }}
+      key={index} // Important: Add a unique key for each marker
+      position={{ lat: marker[0], lng: marker[1] }}
     >
       <img
         src="/images/bustop_blue.webp"
-        alt="Bus Stop Icon"
+        alt="User Location Icon"
         width={28}
         height={33}
       />
     </AdvancedMarker>
-  ));
+  );
 };
 
 export default StopMarkers;

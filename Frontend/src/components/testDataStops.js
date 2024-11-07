@@ -1,29 +1,25 @@
- // Initialize an empty array to store coordinates
+// Initialize an empty array to store coordinates
 
-const fetchData = async () => {
-    let testDataStops = [];
+import { useEffect, useState } from "react";
 
-  try {
-    const response = await fetch('http://localhost:3000/api/transitStops');
+let [testDataStops, settestDataStops] = useState([]);
+useEffect(() => {
+  const fetchStops = async () => {
+    try {
+      const response = await fetch("/api/transitStops");
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      settestDataStops(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
+  };
+}, []);
 
-    const data = await response.json();
+//fetchData();
 
-    // Extract coordinates and push into testDataStops
-    data.forEach(stop => {
-      testDataStops.push(stop.location.coordinates);
-    });
-
-    console.log(testDataStops); // Log the array of coordinates
-
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-  return testDataStops;
-};
-
-fetchData();
-
+export default fetchData;
