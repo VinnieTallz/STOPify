@@ -1,7 +1,7 @@
 import React from 'react';
-import Map from './Map';
-import About from './AboutUs';
-import Contact from './ContactUs';
+import Map from './Map.js';
+import About from './AboutUs.js';
+import Contact from './ContactUs.js';
 
 const Main = () => {
     return (

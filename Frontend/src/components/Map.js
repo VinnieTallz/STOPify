@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 //import BustStopList from './BusStopList';
-import StopMarkers from "./StopMarkers";
-import UserLocation from "./UserLocation";
-
+import StopMarkers from "./StopMarkers.js";
+import UserLocation from "./UserLocation.js";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 
 const MainMap = () => {
@@ -51,7 +50,7 @@ const MainMap = () => {
                   defaultCenter={userLocation}
                   mapId={"ae7d99c514aec5fc"}
                   cameraControl={false}
-                  clickableIcons={false}
+                  clickableIcons={true}
                   disableDefaultUI={true}
                   fullscreenControl={true}
                   maxZoom={16}
