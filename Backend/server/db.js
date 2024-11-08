@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
 const mongo_uri = process.env.MONGO_URI || 'mongodb://localhost:27017/'
 const dbName = process.env.DB_NAME || 'CalgaryTransit'  
@@ -25,8 +25,8 @@ export async function db() {
 }
 
 export async function collection(name) {
-    const database = await db()
-    return database.collection(name)
+    const database = await db();
+    return database.collection(name);
 }
 
 // Create the 2dsphere index when the app starts
@@ -49,5 +49,3 @@ export async function disconnectDb() {
         }
     }
 }
-
-
