@@ -12,7 +12,7 @@ const BusStopList = () => {
       const radius = 5000; // Set the radius for nearby bus stops (in meters)
       try {
         const response = await fetch(
-          `http://localhost:4000/api/transitStops/nearby?lat=${lat}&lng=${lng}&radius=${radius}`
+          `http://localhost:3000/api/busStops/nearby?lat=${lat}&lng=${lng}&radius=${radius}`
         );
         
         if (response.status === 200) {
@@ -71,8 +71,7 @@ const BusStopList = () => {
         <ul className="list-none m-0 p-0 max-h-64 overflow-y-auto">
       
           {busStops.map((stop) => (
-            <li key={stop._id} className="py-1 h10 bg-gray-200 flex items-center justify-center hover:bg-gray-100" >
-             
+            <li key={stop._id} className="py-1 h10 bg-gray-200 flex items-center justify-center hover:bg-gray-100" >    
               <h3>{stop.stop_number}</h3>
               <p>{stop.address}</p>
               {/* Optionally show more details like distance, routes served, etc. */}
@@ -86,3 +85,7 @@ const BusStopList = () => {
 };
 
 export default BusStopList;
+
+
+
+
