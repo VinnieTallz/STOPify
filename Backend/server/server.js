@@ -1,19 +1,32 @@
-import express from 'express'
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
 import showRequests from './showRequests.js'
 // import transitRouteController from './transitRoute/transitRouteController.js'
 import transitStopController from './transitStops/transitStopController.js'
+import BusStopController from './transitStops/BusStopController.js'
+
 
 import { disconnectDb } from './db.js'
+
+dotenv.config();  // Load environment variables from .env file
 
 const port = process.env.PORT || 3000
 const app = express()
 
-app.use(showRequests)
-app.use(express.static('../public_html'))
 app.use(express.json())
+app.use(cors());
+
+app.use('/api/busStops', BusStopController)
+
+app.use(express.static('../public_html'))
+app.use(showRequests)
+
+
 
 // app.use('/api/transitRoute', transitRouteController)
-app.use('/api/transitStops', transitStopController)
+// app.use('/api/transitStops', transitStopController)
+
 
 const server = app.listen(port, () => {
     console.log('Server listening on port ' + port)
@@ -23,3 +36,5 @@ server.on('close',() => {
     console.log('Closing mongo connection')
     disconnectDb()
 })
+
+
