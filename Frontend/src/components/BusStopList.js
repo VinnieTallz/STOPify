@@ -43,7 +43,8 @@ const BusStopList = () => {
         },
         (error) => {
           console.error("Error getting user location:", error);
-          setError("Unable to retrieve your location.");
+          setUserLocation({ lat: 51.0447, lng: -114.0719 });
+          fetchBusStops("51.0447", "-114.0719");
           setLoading(false);
         }
       );
