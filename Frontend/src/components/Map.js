@@ -43,7 +43,7 @@ const MainMap = () => {
         <div className="flex flex-col md:flex-row h-full w-full md:w-2/3 shadow-lg ">
           <APIProvider apiKey={'AIzaSyA4u5WHz6-4ldEWPwyrjjjhhtkOwVm1lyo'} onLoad={() => console.log("API Loaded")}>
             {userLocation && ( // Render the map when userLocation is available
-              <div className="rounded-lg overflow-hidden w-full h-full ">
+              <div className="rounded-t-lg sm:rounded-r-lg overflow-hidden w-full h-full ">
                 <Map
                   className="w-full h-full"
                   defaultZoom={15}

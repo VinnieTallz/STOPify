@@ -14,7 +14,7 @@ const BusStopList = () => {
         const response = await fetch(
           `http://localhost:3000/api/busStops/nearby?lat=${lat}&lng=${lng}&radius=${radius}`
         );
-        
+
         if (response.status === 200) {
           const data = await response.json();
           setBusStops(data); // Store the bus stops in state
@@ -62,21 +62,21 @@ const BusStopList = () => {
   }
 
   return (
-    <div className="h-80 w-90 border border-gray-300 rounded-lg p-2 overflow-hidden" >
-      
+    <div className="rounded-t-lg sm:rounded-l-lg overflow-hidden" >
+
       {busStops.length === 0 ? (
 
         <p>No bus stops found nearby. Please check your location or try again later.</p>
       ) : (
-        <ul className="list-none m-0 p-0 max-h-64 overflow-y-auto">
-      
+        <ul className="list-none m-0 p-0 max-h-80 sm:max-h-full overflow-y-auto">
+
           {busStops.map((stop) => (
-            <li key={stop._id} className="py-1 h10 bg-gray-200 flex items-center justify-center hover:bg-gray-100" >    
+            <li key={stop._id} className="py-1 h10 bg-gray-200 flex items-center justify-center hover:bg-gray-100" >
               <h3>{stop.stop_number}</h3>
               <p>{stop.address}</p>
               {/* Optionally show more details like distance, routes served, etc. */}
             </li>
-            
+
           ))}
         </ul>
       )}
