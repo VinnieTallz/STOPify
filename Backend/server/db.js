@@ -4,7 +4,7 @@ dotenv.config();
 
 const mongo_uri = process.env.MONGO_URI || 'mongodb://localhost:27017/'
 const dbName = process.env.DB_NAME || 'CalgaryTransit'  
-console.log(`Mongo URI: ${mongo_uri}, Database: ${dbName}`)
+// console.log(`Mongo URI: ${mongo_uri}, Database: ${dbName}`)
 
 // const mongo_uri = "mongodb://localhost:27017/"
 // console.log(mongo_uri)
