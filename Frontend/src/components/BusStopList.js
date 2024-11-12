@@ -84,7 +84,7 @@ const BusStopList = () => {
       {busStops.map((stop) => (
         <li
           key={stop._id}
-          className="cursor-pointer border-b-2 hover:bg-gray-200 hover:p-2 transition-all py-1 h10 "
+          className="cursor-pointer border-b-2 hover:bg-gray-200 hover:p-2 hover:rounded-lg transition-all py-1 h10 "
           onClick={() => handleBusStopClick(stop._id)}
         >
           <div className="flex items-center justify-between">
