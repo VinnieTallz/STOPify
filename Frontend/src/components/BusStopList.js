@@ -17,7 +17,7 @@ const BusStopList = () => {
         const response = await fetch(
           `http://localhost:3000/api/busStops/nearby?lat=${lat}&lng=${lng}&radius=${radius}`
         );
-        
+
         if (response.status === 200) {
           const data = await response.json();
           const limitedData = data.slice(0,10);
@@ -47,7 +47,8 @@ const BusStopList = () => {
         },
         (error) => {
           console.error("Error getting user location:", error);
-          setError("Unable to retrieve your location.");
+          setUserLocation({ lat: 51.0447, lng: -114.0719 });
+          fetchBusStops("51.0447", "-114.0719");
           setLoading(false);
         }
       );
@@ -76,13 +77,14 @@ const BusStopList = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 overflow-hidden">
+    <div className="max-w-4xl mx-auto p-4 rounded-t-lg sm:rounded-l-lg overflow-hidden">
     <h1 className="text-3xl font-semibold mb-4 text-center">Nearby Bus Stops</h1>
-    <ul className="space-y-4 max-h-96 p-3 overflow-y-auto">
+    
+    <ul className="space-y-4 max-h-80 sm:max-h-full overflow-y-auto p-3">
       {busStops.map((stop) => (
         <li
           key={stop._id}
-          className="cursor-pointer border-b-2 pb-3 hover:bg-gray-100 transition-all"
+          className="cursor-pointer border-b-2 hover:bg-gray-200 hover:p-2 transition-all py-1 h10 "
           onClick={() => handleBusStopClick(stop._id)}
         >
           <div className="flex items-center justify-between">
