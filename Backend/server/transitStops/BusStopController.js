@@ -16,7 +16,7 @@ router.get('/nearby', async (req, res) => {
       }
     // console.log(`Query parameters - Lat: ${lat}, Lng: ${lng}, Radius: ${radius}`);
   
-    const busStopsCollection = await collection('transitStops');
+    const busStopsCollection = await collection('transitRoutes');
     const query = {
         location: {
           $nearSphere: {
