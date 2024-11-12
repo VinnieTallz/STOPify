@@ -88,8 +88,8 @@ const BusStopList = () => {
           onClick={() => handleBusStopClick(stop._id)}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xl font-medium text-gray-800">{stop.stop_address}</span>
-            <span className="text-sm text-gray-500">Stop Number  {stop.stop_number}</span>
+            <span className="text-xl font-medium text-gray-800">{stop.route_name}</span>
+            <span className="text-sm text-gray-500">Bus Number  {stop.bus_number}</span>
      
             <span className="text-sm text-sky-500"> Details</span>
           </div>
@@ -97,7 +97,7 @@ const BusStopList = () => {
             <div className="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-md">
               <p className="text-gray-600"><strong>Location:</strong> {selectedBusStop.lat}, {selectedBusStop.lng}</p>
               
-              <h4 className="text-md font-semibold mt-4 text-gray-700">Bus Routes:</h4>
+              <h4 className="text-md font-semibold mt-4 text-gray-700">Bus Number:</h4>
               <ul className="list-disc pl-6 text-gray-600">
                 {selectedBusStop.routes && selectedBusStop.routes.length > 0 ? (
                   selectedBusStop.routes.map((route, index) => (
