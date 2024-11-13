@@ -22,7 +22,7 @@ const BusStopList = () => {
 
         if (response.status === 200) {
           const data = await response.json();
-          const limitedData = data.slice(0,10);
+          const limitedData = data.slice(0,20);
           setBusStops(limitedData); 
           setLoading(false); 
         } else {
