@@ -9,7 +9,7 @@ async function fetchDataAndStore() {
     try {
         // Loop through offsets in batches
         for (let offset = 0; offset < totalOffsets; offset += batchSize) {
-            const response = await fetch(`https://data.calgary.ca/resource/muzh-c9qc.json?$offset=${offset}`);
+            const response = await fetch(`https://data.calgary.ca/resource/muzh-c9qc.geojson?$offset=${offset}`);
             
             if (!response.ok) {
                 console.error(`Failed to fetch data at offset ${offset}. Status: ${response.status}`);
@@ -17,16 +17,22 @@ async function fetchDataAndStore() {
             }
             
             const data = await response.json();
-            
-            // Map JSON data to desired format
-            const stops = data.map((cityTransitStop) => ({
-                stop_number: cityTransitStop.teleride_number,
-                address: cityTransitStop.stop_name,
-                city_globalid: cityTransitStop.globalid,
-                location: cityTransitStop.point,
-            }));
-            
-            transitStops.push(...stops);
+
+        // Ensure data is in GeoJSON format with a 'features' array
+            if (data && data.type === 'FeatureCollection' && Array.isArray(data.features)) {
+        // Map over the features array in the GeoJSON
+                const stops = data.features.map((feature) => ({
+                    stop_number: feature.properties.teleride_number,
+                    address: feature.properties.stop_name,
+                    city_globalid: feature.properties.globalid,
+                    location: feature.geometry // GeoJSON point object
+                }));
+    
+                transitStops.push(...stops);
+            } else {
+
+                console.error('Invalid GeoJSON data format.');
+            }
         }
 
         // Batch insert only new stops

@@ -13,7 +13,6 @@ export async function findAllTransitStops(nameFragment) {
 }
 
 export async function findAllTransitStopCoordinates(stop_number) {
-    console.log("hi")
     const mongoQuery = {}
     if (stop_number !== undefined) {
         mongoQuery.stop_number = stop_number
