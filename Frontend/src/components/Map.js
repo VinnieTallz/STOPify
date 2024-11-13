@@ -29,7 +29,7 @@ const MainMap = () => {
   }, []);
 
   return (
-    <div>
+    <div className='h-full w-full'>
       <input
         type="text"
         placeholder="Search your bus..."
