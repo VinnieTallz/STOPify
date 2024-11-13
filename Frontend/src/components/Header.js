@@ -12,7 +12,7 @@ const Header = () => {
       <header className="flex justify-between items-center p-4 bg-sky-500 opacity-90 shadow-md sticky top-0 z-50">
         <div className='flex items-center'>
           <img src='/images/bustop_white.webp' style={{ width: '20px' }} alt="Bus Stop Icon" />
-          <div className="text-white text-xl md:text-2xl text-center ml-2 font-bold stopify-title">STOPify</div>
+          <div className="text-white text-xl sm:text-3xl text-center ml-2 font-bold stopify-title">STOPify</div>
         </div>
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -20,7 +20,7 @@ const Header = () => {
         >
           {isOpen ? (
             <svg
-              className="w-6 h-6"
+              className="w-8 h-8"
               fill="none"
               stroke="white"
               viewBox="0 0 24 24"
@@ -30,7 +30,7 @@ const Header = () => {
             </svg>
           ) : (
             <svg
-              className="w-6 h-6"
+              className="w-8 h-8"
               fill="none"
               stroke="white"
               viewBox="0 0 24 24"
@@ -42,7 +42,7 @@ const Header = () => {
         </button>
 
         <nav className="hidden md:block">
-          <ul className="flex space-x-6">
+          <ul className="flex space-x-6 sm:text-2xl">
             {[
               { name: 'Map', to: '/map', icon: 'fas fa-home' },
               { name: 'About Us', to: '/about-us', icon: 'fas fa-info-circle' },
