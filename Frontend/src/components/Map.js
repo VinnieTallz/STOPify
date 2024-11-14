@@ -10,8 +10,6 @@ const MainMap = () => {
   const [busStops, setBusStops] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedBusStop, setSelectedBusStop] = useState(null);
-
   // Function to fetch bus stops based on user's location
   useEffect(() => {
     async function fetchBusStops(lat, lng) {
@@ -70,7 +68,7 @@ const MainMap = () => {
 
       <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]">
         <div className="flex flex-col w-full shadow-lg sm:w-1/2  ">
-          <BustStopList />
+          <BustStopList busStops={busStops} />
         </div>
         <div className="flex flex-col md:flex-row h-full w-full md:w-2/3 shadow-lg ">
           <APIProvider
