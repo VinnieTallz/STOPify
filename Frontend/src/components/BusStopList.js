@@ -97,8 +97,8 @@ return (
           onClick={() => handleBusStopClick(stop.stop_number)} 
         >
           <div className="flex items-center justify-between">
+            <span className="text-sm text-gray-800 font-medium mr-4 "> {stop.stop_number}</span>
             <span className="text-l font-medium text-gray-800 mr-4">{stop.stop_address}</span>
-            <span className="text-sm text-gray-500 mr-4"> {stop.stop_number}</span>
             <span className="text-sm text-sky-500"> Details</span>
           </div>
 
@@ -110,12 +110,12 @@ return (
               {filteredBusStops.map((filteredStop) => (
                 <div key={filteredStop._id} className="mb-4">
                   <p className="text-gray-600"><strong>Bus Number:</strong> {filteredStop.bus_number}</p>
-                  <p className="text-gray-600"><strong>Route Name:</strong> {filteredStop.route_name}</p>
                   <p className="text-gray-600"><strong>Stop Address:</strong> {filteredStop.stop_address}</p>
-                  <p className="text-gray-600"><strong>Status:</strong> {filteredStop.status}</p>
+                  <p className="text-gray-600"><strong>Route Name:</strong> {filteredStop.route_name}</p>
+                  <p className="text-gray-600"><strong>Status:</strong> <span className='text-green-600 font-medium'>{filteredStop.status}</span></p>
 
-                  <h4 className="text-md font-semibold mt-4 text-gray-700">Location:</h4>
-                  <p className="text-gray-600">{`Latitude: ${filteredStop.location.lat}, Longitude: ${filteredStop.location.lng}`}</p>
+                  {/* <h4 className="text-md font-semibold mt-4 text-gray-700">Location:</h4>
+                  <p className="text-gray-600">{`Latitude: ${filteredStop.location.lat}, Longitude: ${filteredStop.location.lng}`}</p> */}
                 </div>
               ))}
             </div>
