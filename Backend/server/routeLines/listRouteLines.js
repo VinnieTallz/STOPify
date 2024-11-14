@@ -1,6 +1,6 @@
-import { findAllTransitRouteCoordinates } from "./routeLineData.js";
+import { findAllRouteLineCoordinates } from "./routeLineData.js";
 import { disconnectDb } from "../db.js";
 
-let transitRoutes = await findAllTransitRouteCoordinates()
-console.log(transitRoutes)
+let routeLines = await findAllRouteLineCoordinates()
+console.log(routeLines)
 await disconnectDb()

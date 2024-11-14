@@ -39,4 +39,4 @@ router.get('/nearby', async (req, res) => {
 
 
   export default router
- 
+ console.log();

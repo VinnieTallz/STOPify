@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import showRequests from './showRequests.js'
-import BusStopController from './transitStops/BusStopController.js'
+import BusStopController from './transitStops/BusStopController.js';
+import RouteLineController from './routeLines/RouteLineController.js';
 
 
 dotenv.config();  // Load environment variables from .env file
@@ -13,6 +14,7 @@ const app = express()
 app.use(express.json())
 app.use(cors());
 
+app.use('/api/routeLines', RouteLineController)
 app.use('/api/busStops', BusStopController)
 
 app.use(express.static('../public_html'))

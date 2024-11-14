@@ -1,43 +1,43 @@
 import { ObjectId } from "mongodb"
 import { collection } from "../db.js"
 
-export async function findAllTransitRoutes(nameFragment) {
+export async function findAllRouteLines(nameFragment) {
     const mongoQuery = {}
     if (nameFragment !== undefined) {
         mongoQuery.name = nameFragment
     }
-    const transitRoutesCollection = await collection('transitRoutes')
-    const cursor = await transitRoutesCollection.find(mongoQuery) // no query finds everything!
-    const transitRoutes = await cursor.toArray()
-    return transitRoutes
+    const routeLineCollection = await collection('routeLines')
+    const cursor = await routeLineCollection.find(mongoQuery) // no query finds everything!
+    const routeLines = await cursor.toArray()
+    return routeLines
 }
 
-export async function findAllTransitRouteCoordinates(bus_number) {
+export async function findAllRouteLineCoordinates(bus_number) {
     console.log("hi")
     const mongoQuery = {}
-    if (bus_number !== undefined) {
+    if (route_number !== undefined) {
         mongoQuery.bus_number = bus_number
     }
-    const transitRoutesCollection = await collection('transitRoutes')
+    const routeLinesCollection = await collection('routeLines')
     console.log("line 23")
-    const cursor = await transitRoutesCollection.find(mongoQuery).project( {
+    const cursor = await routeLinesCollection.find(mongoQuery).project( {
         _id: 0, // Exclude the _id field
         coordinates: '$location.coordinates' // Extract coordinates
       }) // no query finds everything!
     console.log("line 27")
 
-    const transitRoutes = await cursor.toArray()
+    const routeLines = await cursor.toArray()
     console.log(cursor)
-    return transitRoutes
+    return routeLines
 }
 
-// find routes within a given radius from UserLocation (default is 0.5 km)
-export const findRoutesNearMe = async (latitude, longitude) => {
+// find routelines within a given radius from UserLocation (default is 0.5 km)
+export const findRouteLinesNearMe = async (latitude, longitude) => {
   try {
     const radiusInMeters = 500;  // 0.5 km = 500 meters
 
-    // Perform geospatial query to find nearby routes
-    const nearbyRoutes = await TransitRoute.aggregate([
+    // Perform geospatial query to find nearby routelines
+    const nearbyRouteLines = await routeLine.aggregate([
       {
         $geoNear: {
           near: { type: 'Point', coordinates: [longitude, latitude] },  // [longitude, latitude]
@@ -47,21 +47,21 @@ export const findRoutesNearMe = async (latitude, longitude) => {
         },
       },
     ]);
-    return nearbyRoutes;  // Return the nearby routes
+    return nearbyRouteLines;  // Return the nearby routelines
   } catch (error) {
-    console.error("Error in findRoutesNearMe:", error);
-    throw new Error('Error fetching nearby routes');
+    console.error("Error in findRouteLinesNearMe:", error);
+    throw new Error('Error fetching nearby routelines');
   }
 };
-export async function findTransitRouteById(id) {
-    const transitRoutesCollection  = await collection('transitRoutes')
-    const singleTransitRoute =  await transitRoutesCollection.findOne({_id: new ObjectId(id)})
-    return singleTransitRoute
+export async function findRouteLineById(id) {
+    const routeLinesCollection  = await collection('routeLines')
+    const singleRouteLine =  await routeLinesCollection.findOne({_id: new ObjectId(id)})
+    return singleRouteLine
 }
 
-export async function createTransitRoute(data) {
-    const transitRoutesCollection  = await collection('transitRoutes')
-    const insertResult = await transitRoutesCollection.insertOne(data)
-    console.log('Inserted transitRoute ', insertResult.insertedId)
-    return await transitsCollection.findOne({ _id: insertResult.insertedId })
+export async function createRouteLine(data) {
+    const routeLinesCollection  = await collection('routeLines')
+    const insertResult = await routeLinesCollection.insertOne(data)
+    console.log('Inserted routeLine ', insertResult.insertedId)
+    return await routeLinesCollection.findOne({ _id: insertResult.insertedId })
 }

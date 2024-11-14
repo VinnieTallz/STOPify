@@ -29,7 +29,7 @@ router.get("/:transitRouteId", async function (req, res) {
 router.get("/", async function (req, res) {
   try {
     const transitRoutes = await findAllTransitRoutes();
-    res.send(transitStops); // Return the list of all transit routes
+    res.send(transitRoutes); // Return the list of all transit routes
   } catch (error) {
     console.log(error);
     res.sendStatus(500); // Internal Server Error

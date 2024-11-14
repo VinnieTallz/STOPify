@@ -29,7 +29,7 @@ async function fetchDataAndStore() {
                     })));
 
                     return {
-                        route_line: feature.properties.route_short_name,
+                        bus_number: feature.properties.route_short_name,
                         community: feature.properties.route_long_name,
                         city_globalid: feature.properties.globalid,
                         location: {
