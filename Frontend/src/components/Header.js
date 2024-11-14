@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Transition } from '@headlessui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapLocationDot, faPeopleGroup, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
+
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,11 +46,11 @@ const Header = () => {
         </button>
 
         <nav className="hidden md:block">
-          <ul className="flex space-x-6 sm:text-2xl">
+          <ul className="flex space-x-6 sm:text-xl">
             {[
-              { name: 'Map', to: '/map', icon: 'fas fa-home' },
-              { name: 'About Us', to: '/about-us', icon: 'fas fa-info-circle' },
-              { name: 'Contact Us', to: '/contact-us', icon: 'fas fa-envelope' },
+              { name: 'Map', to: '/map', icon: faMapLocationDot },
+              { name: 'About Us', to: '/about-us', icon: faPeopleGroup },
+              { name: 'Contact Us', to: '/contact-us', icon: faEnvelope },
             ].map(({ name, to, icon }) => (
               <li key={name}>
                 <Link
@@ -55,7 +59,7 @@ const Header = () => {
                 >
                   <span className="absolute left-0 right-0 bottom-0 border-b-2 border-white-500 opacity-0 hover:opacity-100 transition duration-200" />
                   <span className="flex items-center space-x-2">
-                    <i className={icon}></i>
+                    <FontAwesomeIcon icon={icon} />
                     <span>{name}</span>
                   </span>
                 </Link>

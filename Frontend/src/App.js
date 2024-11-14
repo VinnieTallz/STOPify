@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header.js';
 import Main from './components/Main.js';
 import Footer from './components/Footer.js';
@@ -25,16 +25,3 @@ const App = () => {
     );
 };
 export default App;
-
-// const App = () => {
-//     return (
-//         <div className="flex flex-col min-h-screen bg-gray-100">
-//             <Header />
-//             <main className="flex justify-center items-center flex-grow p-4">
-//                 <Main />
-//             </main>
-//             <Footer />
-//         </div>
-//     );
-// };
-// export default App;
