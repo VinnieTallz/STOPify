@@ -1,6 +1,7 @@
-import { findAllRouteLineCoordinates } from "./routeLineData.js";
+import { findAllMergedRouteCoordinates } from "./mergedRoutesData.js";
 import { disconnectDb } from "../db.js";
 
-let routeLines = await findAllRouteLineCoordinates()
-console.log(routeLines)
+let mergedRoutes = await findAllMergedRouteCoordinates()
+console.log(mergedRoutes)
+
 await disconnectDb()

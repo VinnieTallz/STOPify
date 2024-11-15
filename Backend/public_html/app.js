@@ -4,6 +4,8 @@ import { generateTransitStopDetail } from "./transitStopsDetail.js"
 import { generateTransitStopList } from "./transitStopsList.js"
 import { generateRouteLineDetail } from "./routeLinesDetail.js"
 import { generateRouteLineList } from "./routeLinesList.js"
+import { generateMergedRouteDetail } from "./mergedRoutesDetail.js"
+import { generateMergedRouteList } from "./mergedRoutesList.js"
 
 const appElement = document.getElementById('app')
 
@@ -60,6 +62,25 @@ function renderApp() {
      }
     else {
     generateRouteLineDetail(appElement, selectedRouteLineId, setSelectedRouteLineId)
+     }
+}
+
+renderApp()
+
+let selectedMergedRouteId = null
+
+function setSelectedMergedRouteId(id) {
+    console.log('selecting mergedRoute ', id)
+    selectedMergedRouteId = id
+    renderApp()
+}
+
+function renderApp() {
+    if (selectedMergedRouteId === null) {
+    generateMergedRouteList(appElement, setSelectedMergedRouteId)
+     }
+    else {
+    generateMergedRouteDetail(appElement, selectedMergedRouteId, setSelectedMergedRouteId)
      }
 }
 

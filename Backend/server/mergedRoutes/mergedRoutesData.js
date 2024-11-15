@@ -13,22 +13,18 @@ export async function findAllMergedRoutes(nameFragment) {
 }
 
 export async function findAllMergedRouteCoordinates(bus_number) {
-    console.log("hi")
     const mongoQuery = {}
     if (bus_number !== undefined) {
         mongoQuery.bus_number = bus_number
     }
     const mergedRoutesCollection = await collection('mergedRoutes')
-    console.log("line 23")
     const cursor = await mergedRoutesCollection.find(mongoQuery).project( {
         _id: 0, // Exclude the _id field
         coordinates: '$location.coordinates' // Extract coordinates
       }) // no query finds everything!
-    console.log("line 27")
 
     const mergedRoutes = await cursor.toArray()
-    console.log(cursor)
-    return routeLines
+    return mergedRoutes
 }
 
 // find mergedroutes within a given radius from UserLocation (default is 0.5 km)
@@ -58,4 +54,3 @@ export async function findMergedRouteById(id) {
     const singleMergedRoute =  await mergedRoutesCollection.findOne({_id: new ObjectId(id)})
     return singleMergedRoute
 }
-
