@@ -60,12 +60,6 @@ const MainMap = () => {
 
   return (
     <div className="h-full w-full">
-      <input
-        type="text"
-        placeholder="Search your bus..."
-        className="shadow-md rounded-lg p-2 mb-5 w-full focus:outline-none focus:ring-2 focus:ring-sky-500"
-      />
-
       <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]">
         <div className="flex flex-col w-full shadow-lg sm:w-1/2  ">
           <BustStopList busStops={busStops} />
