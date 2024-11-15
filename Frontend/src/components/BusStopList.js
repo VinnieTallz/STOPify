@@ -89,7 +89,7 @@ const BusStopList = ({ busStops, loading, error }) => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto pt-0 px-2 rounded-t-lg sm:rounded-l-lg overflow-hidden">
+    <div className="max-w-4xl mx-auto pt-0 px-2 mx-4 rounded-t-lg sm:rounded-l-lg overflow-hidden">
     <h1 className="text-3xl font-semibold mb-4 text-center">Bus Stops List</h1>
     <input
           type="text"
