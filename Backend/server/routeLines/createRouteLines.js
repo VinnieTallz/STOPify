@@ -15,14 +15,14 @@ const coordinates = process.argv[3].split(',')
 const lon = Number.parseFloat(coordinates[0])
 const lat = Number.parseFloat(coordinates[1])
 const location = { 
-    type: "Point", 
-    coordinates: [ lon, lat ] 
+    type: "MultiLineString", 
+    coordinates: parsedCoordinates
 }
 
 const address = process.argv[4]
 
 await createRouteLine({
-    route_line,
+    bus_number,
     community,
     location,
 })

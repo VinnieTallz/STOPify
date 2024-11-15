@@ -21,10 +21,19 @@ export async function getTransitStops() {
 export async function getTransitStops(id) {
     return getOrDie('/api/transitStops/'+id)
 }
+
 export async function getRouteLines() {
     return getOrDie('/api/routeLines')
 }
 
 export async function getRouteLines(id) {
     return getOrDie('/api/routeLines/'+id)
+}
+
+export async function getMergedRoutes() {
+    return getOrDie('/api/mergedRoutes')
+}
+
+export async function getMergedRoutes(id) {
+    return getOrDie('/api/mergedRoutes/'+id)
 }
