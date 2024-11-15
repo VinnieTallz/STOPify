@@ -1,8 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+// Custom Hook for Debouncing
+const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    // Set a timeout to update the debounced value after the delay
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    // Cleanup on component unmount or when value changes
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+};
 
 const BusStopList = ({ busStops, loading, error }) => {
   const [selectedStopNumber, setSelectedStopNumber] = useState(null); // Track the selected stop number
   const [filteredBusStops, setFilteredBusStops] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Use debounced search query to avoid filtering on every keystroke
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
+
+  useEffect(() => {
+    console.log('Debounced Search Query:', debouncedSearchQuery);
+    console.log('Bus Stops:', busStops); 
+    if (debouncedSearchQuery.trim() === "") {
+      setFilteredBusStops(busStops); // Show all bus stops if the search query is empty
+    } else {
+      const searchQueryLower = debouncedSearchQuery.toLowerCase();
+      const filteredStops = busStops.filter((stop) => {
+        const stopAddress = stop.stop_address ? stop.stop_address.toLowerCase() : '';
+        const routeName = stop.route_name ? stop.route_name.toLowerCase() : '';
+        const busNumber = stop.bus_number ? stop.bus_number.toLowerCase() : '';
+        const stopNumber = stop.stop_number ? stop.stop_number.toLowerCase() : '';
+        return (
+          stopAddress.includes(searchQueryLower) ||
+          routeName.includes(searchQueryLower) ||
+          busNumber.includes(searchQueryLower)||
+          stopNumber.includes(searchQueryLower)
+
+        );
+      });
+      console.log('filtered',filteredStops)
+      setFilteredBusStops(filteredStops); // Update filtered bus stops
+    }
+  }, [debouncedSearchQuery, busStops]);
 
   // Render loading, error, or bus stops
   if (loading) {
@@ -41,10 +89,16 @@ const BusStopList = ({ busStops, loading, error }) => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-4 rounded-t-lg sm:rounded-l-lg overflow-hidden">
-      <h1 className="text-3xl font-semibold mb-4 text-center">
-        Bus Stops List
-      </h1>
+    <div className="max-w-4xl mx-auto pt-0 px-2 rounded-t-lg sm:rounded-l-lg overflow-hidden">
+    <h1 className="text-3xl font-semibold mb-4 text-center">Bus Stops List</h1>
+    <input
+          type="text"
+          placeholder="Search by stop address, bus number or route name..."
+          className="shadow-md rounded-lg p-2 mb-5 w-full focus:outline-none focus:ring-1 focus:ring-sky-500"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+/>
+
       <ul className="space-y-4 max-h-80 sm:max-h-full overflow-y-auto p-3">
         {uniqueBusStops.map(stop =>
           <li
