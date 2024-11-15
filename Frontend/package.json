@@ -1,6 +1,6 @@
 {
   "name": "c13-project2-team4",
-  "proxy": "http://localhost:3000",
+  "proxy": "http://localhost:3001",
   "version": "0.1.0",
   "type": "module",
   "private": true,

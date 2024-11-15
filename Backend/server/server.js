@@ -4,11 +4,12 @@ import dotenv from 'dotenv';
 import showRequests from './showRequests.js'
 import BusStopController from './transitStops/BusStopController.js';
 import RouteLineController from './routeLines/RouteLineController.js';
+import MergedRoutesController from './mergedRoutes/mergedRoutesController.js';
 
 
 dotenv.config();  // Load environment variables from .env file
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 const app = express()
 
 app.use(express.json())
@@ -16,6 +17,8 @@ app.use(cors());
 
 app.use('/api/routeLines', RouteLineController)
 app.use('/api/busStops', BusStopController)
+app.use('/api/mergedRoutes', MergedRoutesController)
+
 
 app.use(express.static('../public_html'))
 app.use(showRequests)

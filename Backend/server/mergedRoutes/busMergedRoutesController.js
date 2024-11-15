@@ -2,7 +2,7 @@ import express from 'express';
 import { collection } from '../db.js';
 
 const router = express.Router();
-// This routeLine fetches bus routeLiness nearby (probably using geospatial query)
+// This mergedRoutes fetches bus mergedroute data nearby ( using geospatial query)
 router.get('/nearby', async (req, res) => {
     try {
       const { lat, lng, radius } = req.query;
@@ -13,7 +13,7 @@ router.get('/nearby', async (req, res) => {
       // Log the input parameters
     console.log(`Query parameters - Lat: ${lat}, Lng: ${lng}, Radius: ${radius}`);
   
-      const busRouteLinesCollection = await collection('routeLines');
+      const busMergedRoutesCollection = await collection('mergedRoutes');
     // Log the query going to MongoDB
     const query = {
         location: {
@@ -25,15 +25,15 @@ router.get('/nearby', async (req, res) => {
       };
       console.log('MongoDB Query:', query);
   
-      const nearbyBusRouteLines = await busRouteLinesCollection.find(query).toArray();
+      const nearbyBusMergedRoutes = await busMergedRoutesCollection.find(query).toArray();
   
       // Log the results
-      console.log('Nearby Bus RouteLines:', nearbyBusRouteLines);
+      console.log('Nearby Bus mergedRoutes:', nearbyBusMergedRoutes);
   
-      res.json(nearbyBusRouteLines);  // Send back the nearby bus routeLines
+      res.json(nearbyBusMergedRoutes);  // Send back the nearby bus mergedroutes
     } catch (err) {
-      console.error('Error fetching nearby bus routeLines:', err);
-      res.status(500).json({ message: 'Unable to fetch bus routeLines' });
+      console.error('Error fetching nearby bus mergedroutes:', err);
+      res.status(500).json({ message: 'Unable to fetch bus mergedroutes' });
     }
   });
 
