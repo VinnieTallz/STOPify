@@ -100,7 +100,7 @@ const BusStopList = ({ busStops, loading, error }) => {
 />
 
       <ul className="space-y-4 max-h-80 sm:max-h-full overflow-y-auto p-3">
-        {uniqueBusStops.map(stop =>
+        {filteredBusStops.map(stop =>
           <li
             key={stop._id}
             className="cursor-pointer border-b-2 hover:bg-gray-200 hover:p-2 hover:rounded-lg transition-all py-1 h10 "
