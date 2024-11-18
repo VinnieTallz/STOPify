@@ -35,13 +35,13 @@ const StopMarkers = ({ busStops, selectedStopNumber, onMarkerClick }) => {
           onCloseClick={() => setInfoWindowOpen(null)}
         >
           <div>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-lg">
               <strong>Bus Number:</strong> {busStop.bus_number}
             </p>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-lg">
               <strong>Stop Address:</strong> {busStop.stop_address}
             </p>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-lg">
               <strong>Route Name:</strong> {busStop.route_name}
             </p>
           </div>
