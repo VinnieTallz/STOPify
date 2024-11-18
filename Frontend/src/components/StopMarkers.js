@@ -28,8 +28,8 @@ const StopMarkers = ({ busStops }) => {
       {infoWindowOpen === busStop && (
         <InfoWindow
           position={{
-            lat: busStop.location.coordinates[1],
-            lng: busStop.location.coordinates[0],
+            lat: busStop.transit_location.coordinates[1],
+            lng: busStop.transit_location.coordinates[0],
           }}
           onCloseClick={() => setInfoWindowOpen(null)}
         >
