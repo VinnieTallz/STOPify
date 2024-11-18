@@ -6,8 +6,8 @@ const StopMarkers = ({ busStops }) => {
     <AdvancedMarker
       key={index}
       position={{
-        lat: busStops.location.coordinates[1],
-        lng: busStops.location.coordinates[0]
+        lat: busStops.transit_location.coordinates[1],
+        lng: busStops.transit_location.coordinates[0]
       }}
     >
       <img

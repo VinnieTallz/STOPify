@@ -14,22 +14,22 @@ router.get('/nearby', async (req, res) => {
       if (!lat || !lng || !radius) {
         return res.status(400).json({ message: 'Missing required query parameters: lat, lng, radius' });
       }
-    // console.log(`Query parameters - Lat: ${lat}, Lng: ${lng}, Radius: ${radius}`);
+    console.log(`Query parameters - Lat: ${lat}, Lng: ${lng}, Radius: ${radius}`);
   
-    const busStopsCollection = await collection('transitRoutes');
+    const busStopsCollection = await collection('mergedRoutes');
     const query = {
-        location: {
+        transit_location: {
           $nearSphere: {
             $geometry: { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
             $maxDistance: parseInt(radius),
           }
         }
       };
-    //   console.log('MongoDB Query:', query);
+      console.log('MongoDB Query:', query);
   
       const nearbyBusStops = await busStopsCollection.find(query).toArray();
 
-    //   console.log('Nearby Bus Stops:', nearbyBusStops);
+      console.log('Nearby Bus Stops:', nearbyBusStops);
   
       res.json(nearbyBusStops); 
     } catch (err) {
