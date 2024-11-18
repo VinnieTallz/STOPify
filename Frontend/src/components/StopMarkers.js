@@ -1,21 +1,23 @@
-import React, { useCallback } from "react";
-import { AdvancedMarker } from "@vis.gl/react-google-maps";
+import React, { useCallback, useState } from "react";
+import { InfoWindow, AdvancedMarker } from '@vis.gl/react-google-maps';
 
 const StopMarkers = ({ busStops }) => {
-  const handleClick = useCallback((ev: google.maps.MapMouseEvent) => {
-    //When a markers is clicked, send a message to console
-    console.log("marker clicked:");
-  });
+  const [infoWindowOpen, setInfoWindowOpen] = useState(null);
 
-  return busStops.map((busStops, index) =>
+  const handleClick = useCallback((busStop) => {
+    setInfoWindowOpen(infoWindowOpen === busStop ? null : busStop);
+  }, [infoWindowOpen]);
+
+
+  return busStops.map((busStop, index) =>
     <AdvancedMarker
       key={index}
       position={{
-        lat: busStops.location.coordinates[1],
-        lng: busStops.location.coordinates[0]
+        lat: busStop.location.coordinates[1],
+        lng: busStop.location.coordinates[0]
       }}
       clickable={true}
-      onClick={handleClick}
+      onClick={() => handleClick(busStop)}
     >
       <img
         src="/images/bustop_blue.webp"
@@ -23,6 +25,27 @@ const StopMarkers = ({ busStops }) => {
         width={28}
         height={33}
       />
+      {infoWindowOpen === busStop && (
+        <InfoWindow
+          position={{
+            lat: busStop.location.coordinates[1],
+            lng: busStop.location.coordinates[0],
+          }}
+          onCloseClick={() => setInfoWindowOpen(null)}
+        >
+          <div>
+            <p className="text-gray-600">
+              <strong>Bus Number:</strong> {busStop.bus_number}
+            </p>
+            <p className="text-gray-600">
+              <strong>Stop Address:</strong> {busStop.stop_address}
+            </p>
+            <p className="text-gray-600">
+              <strong>Route Name:</strong> {busStop.route_name}
+            </p>
+          </div>
+        </InfoWindow>
+      )}
     </AdvancedMarker>
   );
 };
