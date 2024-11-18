@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { InfoWindow, AdvancedMarker } from '@vis.gl/react-google-maps';
 
-const StopMarkers = ({ busStops }) => {
+const StopMarkers = ({ busStops, selectedStopNumber, onMarkerClick }) => {
   const [infoWindowOpen, setInfoWindowOpen] = useState(null);
 
   const handleClick = useCallback((busStop) => {
@@ -9,7 +9,7 @@ const StopMarkers = ({ busStops }) => {
   }, [infoWindowOpen]);
 
 
-  return busStops.map((busStop, index) =>
+  return busStops.map((busStop, index) => (
     <AdvancedMarker
       key={index}
       position={{
@@ -17,7 +17,7 @@ const StopMarkers = ({ busStops }) => {
         lng: busStop.transit_location.coordinates[0]
       }}
       clickable={true}
-      onClick={() => handleClick(busStop)}
+      onClick={() => onMarkerClick(busStop.stop_number)}
     >
       <img
         src="/images/bustop_blue.webp"
@@ -25,7 +25,8 @@ const StopMarkers = ({ busStops }) => {
         width={28}
         height={33}
       />
-      {infoWindowOpen === busStop && (
+
+      {selectedStopNumber === busStop.stop_number && (
         <InfoWindow
           position={{
             lat: busStop.transit_location.coordinates[1],
@@ -47,7 +48,7 @@ const StopMarkers = ({ busStops }) => {
         </InfoWindow>
       )}
     </AdvancedMarker>
-  );
+  ));
 };
 
 export default StopMarkers;

@@ -8,11 +8,15 @@ import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 const MainMap = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [busStops, setBusStops] = useState([]);
+  const [selectedStopNumber, setSelectedStopNumber] = useState(null);
+  const [selectedStopDetails, setSelectedStopDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   // Function to fetch bus stops based on user's location
   useEffect(() => {
-    async function fetchBusStops(lat, lng) {
+    let isMounted = true;
+    const fetchBusStops = async (lat, lng) => {
       const radius = 5000;
       try {
         const response = await fetch(
@@ -20,16 +24,19 @@ const MainMap = () => {
         );
 
         if (response.status === 200) {
+          if (!isMounted) return;
           const data = await response.json();
           const limitedData = data.slice(0, 20);
           setBusStops(limitedData);
-        
+
           setLoading(false);
         } else {
+          if (!isMounted) return;
           setError("Failed to fetch bus stops.");
           setLoading(false);
         }
       } catch (error) {
+        if (!isMounted) return;
         console.error("Error fetching bus stops:", error);
         setError("Unable to retrieve bus stops.");
         setLoading(false);
@@ -37,33 +44,52 @@ const MainMap = () => {
     }
 
     // Get user location and fetch bus stops
-    function getUserLocation() {
+    const getUserLocation = () => {
       navigator.geolocation.getCurrentPosition(
-        position => {
+        (position) => {
+          if (!isMounted) return;
+
           const location = {
             lat: position.coords.latitude,
-            lng: position.coords.longitude
+            lng: position.coords.longitude,
           };
           setUserLocation(location);
           fetchBusStops(location.lat, location.lng);
         },
-        error => {
+        (error) => {
+          if (!isMounted) return;
+
           console.error("Error getting user location:", error);
           setUserLocation({ lat: 51.0447, lng: -114.0719 });
-          fetchBusStops("51.0447", "-114.0719");
+          fetchBusStops(51.0447, -114.0719);
           setLoading(false);
         }
       );
-    }
-
+    };
     getUserLocation();
   }, []);
+
+
+  useEffect(() => {
+    if (selectedStopNumber !== null) {
+      const details = busStops.find(stop => stop.stop_number === selectedStopNumber);
+      setSelectedStopDetails(details);
+    } else {
+      setSelectedStopDetails(null);
+    }
+  }, [selectedStopNumber, busStops]);
 
   return (
     <div className="h-full w-full">
       <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]">
         <div className="flex flex-col w-full shadow-lg sm:w-1/2  ">
-          <BustStopList busStops={busStops} />
+          <BustStopList
+            busStops={busStops}
+            selectedStopNumber={selectedStopNumber}
+            onBusStopSelect={setSelectedStopNumber}
+            loading={loading}
+            error={error}
+          />
         </div>
         <div className="flex flex-col md:flex-row h-full w-full md:w-2/3 shadow-lg ">
           <APIProvider
@@ -93,7 +119,12 @@ const MainMap = () => {
                     />
                   </AdvancedMarker>
 
-                  <StopMarkers busStops={busStops} />
+                  <StopMarkers
+                    busStops={busStops}
+                    selectedStopNumber={selectedStopNumber}
+                    onMarkerClick={setSelectedStopNumber}
+                  />
+
                 </Map>
               </div>}
           </APIProvider>

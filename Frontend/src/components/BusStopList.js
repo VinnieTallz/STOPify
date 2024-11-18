@@ -17,10 +17,10 @@ const useDebounce = (value, delay) => {
   return debouncedValue;
 };
 
-const BusStopList = ({ busStops, loading, error }) => {
-  const [selectedStopNumber, setSelectedStopNumber] = useState(null); 
-  const [searchQuery, setSearchQuery] = useState(""); 
-  const [filteredBusStops, setFilteredBusStops] = useState(busStops); 
+const BusStopList = ({ busStops, selectedStopNumber, onBusStopSelect, loading, error }) => {
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredBusStops, setFilteredBusStops] = useState(busStops);
 
   // Use debounced search query to avoid filtering on every keystroke
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
@@ -28,26 +28,26 @@ const BusStopList = ({ busStops, loading, error }) => {
   // Filter bus stops based on debounced search query
   useEffect(() => {
     if (debouncedSearchQuery.trim() === "") {
-      setFilteredBusStops(busStops); 
+      setFilteredBusStops(busStops);
     } else {
-      const searchQueryLower = debouncedSearchQuery.toLowerCase().trim();  
+      const searchQueryLower = debouncedSearchQuery.toLowerCase().trim();
       const filteredStops = busStops.filter((stop) => {
         const stopAddress = stop.stop_address ? stop.stop_address.toLowerCase() : '';
         const routeName = stop.route_name ? stop.route_name.toLowerCase() : '';
         const busNumber = stop.bus_number ? stop.bus_number.toLowerCase() : '';
         const stopNumber = stop.stop_number ? stop.stop_number.toLowerCase() : '';
         const community = stop.community ? stop.community.toLowerCase() : '';
-      
+
         return (
           stopAddress.includes(searchQueryLower) ||
           routeName.includes(searchQueryLower) ||
           busNumber.includes(searchQueryLower) ||
-          stopNumber.includes(searchQueryLower)||
+          stopNumber.includes(searchQueryLower) ||
           community.includes(searchQueryLower)
 
         );
       });
-      setFilteredBusStops(filteredStops); 
+      setFilteredBusStops(filteredStops);
     }
   }, [debouncedSearchQuery, busStops]);
 
@@ -62,11 +62,7 @@ const BusStopList = ({ busStops, loading, error }) => {
 
   // Handle click event on a bus stop to toggle the details
   const handleBusStopClick = (stopNumber) => {
-    if (selectedStopNumber === stopNumber) {
-      setSelectedStopNumber(null); 
-    } else {
-      setSelectedStopNumber(stopNumber); 
-    }
+    onBusStopSelect(stopNumber)
   };
 
   // Filter bus stops with the selected stop number
@@ -104,52 +100,58 @@ const BusStopList = ({ busStops, loading, error }) => {
         </div>
       ) : (
         <ul className="space-y-4 max-h-80 sm:max-h-full overflow-y-auto p-3">
-          {Object.keys(uniqueStopNumbers).map((stopNumber) => (
+          {Object.entries(uniqueStopNumbers).map(([stopNumber, stops]) => (
             <li
               key={stopNumber}
-              className="cursor-pointer border-b-2 hover:bg-gray-200 hover:p-2 hover:rounded-lg transition-all py-1 h10"
-              onClick={() => handleBusStopClick(stopNumber)}
+              className={`cursor-pointer border-b-2 hover:bg-gray-200 hover:p-2 hover:rounded-lg transition-all py-1 h-auto ${stopNumber === selectedStopNumber ? 'bg-blue-200' : ''
+                }`}
+              onClick={() => onBusStopSelect(stopNumber)}
             >
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-800 font-medium mr-4">
-                  {stopNumber}
-                </span>
-                <span className="text-l font-medium text-gray-800 mr-4">
-                  {uniqueStopNumbers[stopNumber][0].stop_address} 
-                </span>
-                <span className="text-sm text-sky-500"> Details</span>
-              </div>
-              {selectedStopNumber === stopNumber && (
-                <div className="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-md h-60 overflow-y-auto">
-                  <h3 className="text-lg font-semibold mb-2 text-gray-700">
-                    Details for Bus Stop Number {stopNumber}:
-                  </h3>
+              {stops.map((stop) => (
+                <div key={stop._id}>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-800 font-medium mr-4">
+                      {stop.stop_number}
+                    </span>
+                    <span className="text-l font-medium text-gray-800 mr-4">
+                      {stop.stop_address}
+                    </span>
+                    <span className="text-sm text-sky-500"> Details</span>
+                  </div>
 
-                  {/* Show all bus stops with the same stop_number */}
-                  {uniqueStopNumbers[stopNumber].map((relatedStop) => (
-                    <div key={relatedStop._id} className="mb-4">
-                      <p className="text-gray-600">
-                        <strong>Bus Number:</strong> {relatedStop.bus_number}
-                      </p>
-                      <p className="text-gray-600">
-                        <strong>Stop Address:</strong> {relatedStop.stop_address}
-                      </p>
-                      <p className="text-gray-600">
-                        <strong>Community:</strong> {relatedStop.community}
-                      </p>
-                      <p className="text-gray-600">
-                        <strong>Route Name:</strong> {relatedStop.route_name}
-                      </p>
-                      <p className="text-gray-600">
-                        <strong>Status:</strong>{" "}
-                        <span className="text-green-600 font-medium">
-                          {relatedStop.status}
-                        </span>
-                      </p>
+                  {selectedStopNumber === stop.stop_number && (
+                    <div className="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-md h-60 overflow-y-auto">
+                      <h3 className="text-lg font-semibold mb-2 text-gray-700">
+                        Details for Bus Stop Number {stop.stop_number}:
+                      </h3>
+
+                      {/* Show all bus stops with the same stop_number */}
+                      {uniqueStopNumbers[stopNumber].map((relatedStop) => (
+                        <div key={relatedStop._id} className="mb-4">
+                          <p className="text-gray-600">
+                            <strong>Bus Number:</strong> {relatedStop.bus_number}
+                          </p>
+                          <p className="text-gray-600">
+                            <strong>Stop Address:</strong> {relatedStop.stop_address}
+                          </p>
+                          <p className="text-gray-600">
+                            <strong>Community:</strong> {relatedStop.community}
+                          </p>
+                          <p className="text-gray-600">
+                            <strong>Route Name:</strong> {relatedStop.route_name}
+                          </p>
+                          <p className="text-gray-600">
+                            <strong>Status:</strong>{" "}
+                            <span className="text-green-600 font-medium">
+                              {relatedStop.status}
+                            </span>
+                          </p>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  )}
                 </div>
-              )}
+              ))}
             </li>
           ))}
         </ul>
