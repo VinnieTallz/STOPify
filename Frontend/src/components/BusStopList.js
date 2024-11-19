@@ -60,10 +60,15 @@ const BusStopList = ({ busStops, selectedStopNumber, onBusStopSelect, loading, e
     return <div>{error.message || JSON.stringify(error)}</div>;
   }
 
-  // Handle click event on a bus stop to toggle the details
   const handleBusStopClick = (stopNumber) => {
-    onBusStopSelect(stopNumber)
+    if (selectedStopNumber === stopNumber) {
+      onBusStopSelect(null); 
+    } else {
+      onBusStopSelect(stopNumber);
+    }
   };
+
+ 
 
   // Filter bus stops with the selected stop number
   const relatedBusStops = selectedStopNumber
@@ -103,9 +108,9 @@ const BusStopList = ({ busStops, selectedStopNumber, onBusStopSelect, loading, e
           {Object.entries(uniqueStopNumbers).map(([stopNumber, stops]) => (
             <li
               key={stopNumber}
-              className={`cursor-pointer border-b-2 hover:bg-gray-200 hover:p-2 hover:rounded-lg transition-all py-1 h-auto ${stopNumber === selectedStopNumber ? 'bg-blue-200' : ''
+              className={`cursor-pointer border-b-2 hover:bg-gray-200 hover:p-2 hover:rounded-lg transition-all py-1 h-auto ${stopNumber === selectedStopNumber ? 'bg-blue-100 p-4 rounded-lg' : ''
                 }`}
-              onClick={() => onBusStopSelect(stopNumber)}
+              onClick={() => handleBusStopClick(stopNumber)}
             >
               {stops.map((stop) => (
                 <div key={stop._id}>
@@ -140,12 +145,12 @@ const BusStopList = ({ busStops, selectedStopNumber, onBusStopSelect, loading, e
                           <p className="text-gray-600">
                             <strong>Route Name:</strong> {relatedStop.route_name}
                           </p>
-                          <p className="text-gray-600">
+                          {/* <p className="text-gray-600">
                             <strong>Status:</strong>{" "}
                             <span className="text-green-600 font-medium">
                               {relatedStop.status}
                             </span>
-                          </p>
+                          </p> */}
                         </div>
                       ))}
                     </div>
