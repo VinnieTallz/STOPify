@@ -18,7 +18,7 @@ router.get('/nearby', async (req, res) => {
   
     const busStopsCollection = await collection('mergedRoutes');
     const query = {
-        transit_location: {
+        location: {
           $nearSphere: {
             $geometry: { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
             $maxDistance: parseInt(radius),
