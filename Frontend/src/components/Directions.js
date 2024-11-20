@@ -1,4 +1,4 @@
-import { APIProvider, useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
+import { useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 
 const Directions = ({ userLocation }) => {

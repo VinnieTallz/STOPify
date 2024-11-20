@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BustStopList from "./BusStopList.js";
 import StopMarkers from "./StopMarkers.js";
-import UserLocation from "./UserLocation.js";
 import Directions from "./Directions.js";
 
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
@@ -133,7 +132,6 @@ const MainMap = () => {
                 </Map>
               </div>}
           </APIProvider>
-          <UserLocation />
         </div>
       </div>
     </div>
