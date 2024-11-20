@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import BustStopList from "./BusStopList.js";
 import StopMarkers from "./StopMarkers.js";
 import UserLocation from "./UserLocation.js";
+import Directions from "./Directions.js";
 
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 
@@ -41,22 +42,22 @@ const MainMap = () => {
         setError("Unable to retrieve bus stops.");
         setLoading(false);
       }
-    }
+    };
 
     // Get user location and fetch bus stops
     const getUserLocation = () => {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        position => {
           if (!isMounted) return;
 
           const location = {
             lat: position.coords.latitude,
-            lng: position.coords.longitude,
+            lng: position.coords.longitude
           };
           setUserLocation(location);
           fetchBusStops(location.lat, location.lng);
         },
-        (error) => {
+        error => {
           if (!isMounted) return;
 
           console.error("Error getting user location:", error);
@@ -69,15 +70,19 @@ const MainMap = () => {
     getUserLocation();
   }, []);
 
-
-  useEffect(() => {
-    if (selectedStopNumber !== null) {
-      const details = busStops.find(stop => stop.stop_number === selectedStopNumber);
-      setSelectedStopDetails(details);
-    } else {
-      setSelectedStopDetails(null);
-    }
-  }, [selectedStopNumber, busStops]);
+  useEffect(
+    () => {
+      if (selectedStopNumber !== null) {
+        const details = busStops.find(
+          stop => stop.stop_number === selectedStopNumber
+        );
+        setSelectedStopDetails(details);
+      } else {
+        setSelectedStopDetails(null);
+      }
+    },
+    [selectedStopNumber, busStops]
+  );
 
   return (
     <div className="h-full w-full">
@@ -110,6 +115,7 @@ const MainMap = () => {
                   maxZoom={16}
                   minZoom={10}
                 >
+                  <Directions userLocation={userLocation} />
                   <AdvancedMarker position={userLocation}>
                     <img
                       src="userLocationIcon.png"
@@ -124,7 +130,6 @@ const MainMap = () => {
                     selectedStopNumber={selectedStopNumber}
                     onMarkerClick={setSelectedStopNumber}
                   />
-
                 </Map>
               </div>}
           </APIProvider>
