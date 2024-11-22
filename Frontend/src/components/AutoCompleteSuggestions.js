@@ -3,55 +3,59 @@ import React, { useState, useEffect } from "react";
 /* global google */
 const AutocompleteSuggestions = ({ input, onSuggestionSelect }) => {
   const [suggestions, setSuggestions] = useState([]);
-  const [token, setToken] = useState(null);
+  const [sessionToken, setSessionToken] = useState(null);
 
   useEffect(() => {
-    // Load Google Maps Places library and create a session token
-    const loadPlacesLibrary = async () => {
-      const { AutocompleteSessionToken } = await google.maps.importLibrary("places");
-      setToken(new AutocompleteSessionToken());
-    };
-    loadPlacesLibrary();
+    // Check if Google Maps API is loaded
+    if (window.google && google.maps && google.maps.places) {
+      setSessionToken(new google.maps.places.AutocompleteSessionToken());
+    } else {
+      console.error("Google Maps API is not loaded. Check your API key and script.");
+    }
   }, []);
 
   useEffect(() => {
-    // Fetch suggestions when input changes
     const fetchSuggestions = async () => {
-      if (!input.trim() || !token) return;
+      if (!input.trim() || !sessionToken) {
+        setSuggestions([]);
+        return;
+      }
 
-      const { AutocompleteSuggestion } = await google.maps.importLibrary("places");
+      if (!window.google || !google.maps || !google.maps.places) {
+        console.error("Google Maps API is not available.");
+        return;
+      }
 
-      const userLocation = await new Promise((resolve) => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => resolve({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          }),
-          () => resolve(null)
-        );
-      });
+      const autocompleteService = new google.maps.places.AutocompleteService();
 
-      if (!userLocation) return;
+      // Set Calgary's latitude and longitude as the location bias
+      const calgaryLatLng = new google.maps.LatLng(51.0447, -114.0719);
 
       const request = {
         input,
-        origin: userLocation,
-        language: "en-US",
-        region: "us",
-        sessionToken: token,
+        location: calgaryLatLng,
+        radius: 50000, // 50 km radius
+        sessionToken,
+        componentRestrictions: { country: "ca" }, // Restrict to Canada
       };
 
       try {
-        const { suggestions } = await AutocompleteSuggestion.fetchAutocompleteSuggestions(request);
-        setSuggestions(suggestions.map((s) => s.placePrediction.text));
+        autocompleteService.getPlacePredictions(request, (predictions, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK && predictions) {
+            setSuggestions(predictions);
+          } else {
+            console.error("No predictions available or error in fetching predictions.");
+            setSuggestions([]);
+          }
+        });
       } catch (error) {
-        console.error("Error fetching suggestions:", error);
+        console.error("Error fetching autocomplete suggestions:", error);
         setSuggestions([]);
       }
     };
 
     fetchSuggestions();
-  }, [input, token]);
+  }, [input, sessionToken]);
 
   return (
     <div className="autocomplete-suggestions">
