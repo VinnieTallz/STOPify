@@ -27,7 +27,7 @@ router.get('/nearby', async (req, res) => {
       };
     //   console.log('MongoDB Query:', query);
   
-      const nearbyBusStops = await busStopsCollection.find(query).toArray();
+      const nearbyBusStops = await busStopsCollection.find(query).limit(20).toArray();
 
     //   console.log('Nearby Bus Stops:', nearbyBusStops);
   

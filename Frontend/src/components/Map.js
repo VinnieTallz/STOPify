@@ -12,6 +12,7 @@ const MainMap = () => {
   const [selectedStopDetails, setSelectedStopDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [busTimes, setBusTimes] = useState([]); 
 
   // Function to fetch bus stops based on user's location
   useEffect(() => {
@@ -83,6 +84,16 @@ const MainMap = () => {
     [selectedStopNumber, busStops]
   );
 
+  const handleDirectionsResponse = (busTimes) => {
+    if (Array.isArray(busTimes)) {
+      setBusTimes(busTimes);  
+    } else {
+      console.error('Expected busTimes to be an array, but got:', busTimes);
+      setBusTimes([]);  
+    }
+  };
+  
+  
   return (
     <div className="h-full w-full">
       <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]">
@@ -114,7 +125,7 @@ const MainMap = () => {
                   maxZoom={16}
                   minZoom={10}
                 >
-                  <Directions userLocation={userLocation} />
+                  <Directions userLocation={userLocation}  selectedStopNumber={selectedStopNumber} onDirectionsResponse={handleDirectionsResponse}  />
                   <AdvancedMarker position={userLocation}>
                     <img
                       src="userLocationIcon.png"
@@ -128,6 +139,7 @@ const MainMap = () => {
                     busStops={busStops}
                     selectedStopNumber={selectedStopNumber}
                     onMarkerClick={setSelectedStopNumber}
+                    busTimes={busTimes}
                   />
                 </Map>
               </div>}

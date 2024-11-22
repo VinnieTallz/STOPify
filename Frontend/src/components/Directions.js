@@ -1,7 +1,7 @@
 import { useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 
-const Directions = ({ userLocation }) => {
+const Directions = ({ userLocation,onDirectionsResponse,selectedStopNumber }) => {
   const map = useMap();
   const routesLibrary = useMapsLibrary("routes");
 
@@ -33,12 +33,40 @@ const Directions = ({ userLocation }) => {
         .then(response => {
           directionsRenderer.setDirections(response);
           setRoutes(response.routes);
+    
         });
     },
     [directionsService, directionsRenderer]
   );
+
+  useEffect(
+    () => {
+      if (routes.length == 0) {
+        return 
+      }
+          const routeData = routes[0].legs[0];
+          // console.log('hhh',routeData)
+
+          const arrivalTime = routeData.arrival_time.text;
+          const departureTime = routeData.departure_time.text;
+          const duration = routeData.duration.text;
+      
+          const busTimes = [{
+            stopNumber: selectedStopNumber,  
+            arrivalTime,
+            departureTime,
+            duration
+          }];
+          // console.log('Bus Times:', busTimes);  
+          onDirectionsResponse(busTimes); 
+    },
+    [selectedStopNumber,routes]
+  );
   console.log("routes object:" + routes);
   return null;
+  
 };
+
+
 
 export default Directions;
