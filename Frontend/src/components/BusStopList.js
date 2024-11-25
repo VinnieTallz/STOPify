@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import AutocompleteSuggestions from "./AutoCompleteSuggestions.js";
+import { useLayoutEffect } from 'react'; // Import useLayoutEffect
+
 
 // Custom Hook for Debouncing
 const useDebounce = (value, delay) => {
@@ -86,7 +88,7 @@ const BusStopList = ({ busStops, selectedStopNumber, userDestination, setUserDes
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {  // Replace useEffect with useLayoutEffect
     if (selectedStopNumber) {
       scrollToTop(selectedStopNumber);
     }
@@ -102,17 +104,17 @@ const BusStopList = ({ busStops, selectedStopNumber, userDestination, setUserDes
   }
 
   return (
-    <div className="max-w-4xl mx-auto pt-0 px-2 mx-4 rounded-t-lg sm:rounded-l-lg overflow-hidden">
+    <div className="max-w-4xl mx-auto pt-0 px-2 mx-4 rounded-t-lg sm:h-max-content sm:rounded-l-lg overflow-hidden">
 
-      <h1 className="text-3xl font-semibold mb-4 text-center">Stops Near Me</h1>
 
-      <input
+
+      {/* <input
         type="text"
         placeholder="Search for your destination.."
         className="shadow-md rounded-lg p-2 mb-5 w-full focus:outline-none focus:ring-1 focus:ring-sky-500"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-      />
+      /> */}
 
       <AutocompleteSuggestions input={searchQuery} onSuggestionSelect={handleSuggestionSelect} userDestination={userDestination} setUserDestination={setUserDestination} />
 
@@ -122,7 +124,7 @@ const BusStopList = ({ busStops, selectedStopNumber, userDestination, setUserDes
           No bus stops found for your search.
         </div>
       ) : (
-        <ul ref={listRef} className="space-y-4 max-h-80 sm:max-h-full overflow-y-auto p-3">
+        <ul ref={listRef} className="space-y-4 overflow-y-auto p-3 h-full">
           {Object.entries(uniqueStopNumbers).map(([stopNumber, stops]) => (
             <li
               key={stopNumber}
