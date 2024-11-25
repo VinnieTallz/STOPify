@@ -18,7 +18,7 @@ const useDebounce = (value, delay) => {
   return debouncedValue;
 };
 
-const BusStopList = ({ busStops, selectedStopNumber, onBusStopSelect, loading, error }) => {
+const BusStopList = ({ busStops, selectedStopNumber, userDestination, setUserDestination, onBusStopSelect, loading, error }) => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredBusStops, setFilteredBusStops] = useState(busStops);
@@ -105,7 +105,7 @@ const BusStopList = ({ busStops, selectedStopNumber, onBusStopSelect, loading, e
       />
 
       {/* Show the autocomplete suggestions */}
-      <AutocompleteSuggestions input={searchQuery} onSuggestionSelect={handleSuggestionSelect} />
+      <AutocompleteSuggestions input={searchQuery} onSuggestionSelect={handleSuggestionSelect} userDestination={userDestination} setUserDestination={setUserDestination} />
 
       {/* Show message if no bus stops match the search query */}
       {noResultsFound && debouncedSearchQuery.trim() !== "" ? (

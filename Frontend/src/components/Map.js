@@ -7,12 +7,13 @@ import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 
 const MainMap = () => {
   const [userLocation, setUserLocation] = useState(null);
+  const [userDestination, setUserDestination] = useState(null);
   const [busStops, setBusStops] = useState([]);
   const [selectedStopNumber, setSelectedStopNumber] = useState(null);
   const [selectedStopDetails, setSelectedStopDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [busTimes, setBusTimes] = useState([]); 
+  const [busTimes, setBusTimes] = useState([]);
 
   // Function to fetch bus stops based on user's location
   useEffect(() => {
@@ -84,22 +85,23 @@ const MainMap = () => {
     [selectedStopNumber, busStops]
   );
 
-  const handleDirectionsResponse = (busTimes) => {
+  const handleDirectionsResponse = busTimes => {
     if (Array.isArray(busTimes)) {
-      setBusTimes(busTimes);  
+      setBusTimes(busTimes);
     } else {
-      console.error('Expected busTimes to be an array, but got:', busTimes);
-      setBusTimes([]);  
+      console.error("Expected busTimes to be an array, but got:", busTimes);
+      setBusTimes([]);
     }
   };
-  
-  
+
   return (
     <div className="h-full w-full">
       <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]">
         <div className="flex flex-col w-full shadow-lg sm:w-1/2  ">
           <BustStopList
             busStops={busStops}
+            userDestination={userDestination}
+            setUserDestination={setUserDestination}
             selectedStopNumber={selectedStopNumber}
             onBusStopSelect={setSelectedStopNumber}
             loading={loading}
@@ -125,7 +127,12 @@ const MainMap = () => {
                   maxZoom={16}
                   minZoom={10}
                 >
-                  <Directions userLocation={userLocation}  selectedStopNumber={selectedStopNumber} onDirectionsResponse={handleDirectionsResponse}  />
+                  <Directions
+                    userLocation={userLocation}
+                    userDestination={userDestination}
+                    selectedStopNumber={selectedStopNumber}
+                    onDirectionsResponse={handleDirectionsResponse}
+                  />
                   <AdvancedMarker position={userLocation}>
                     <img
                       src="userLocationIcon.png"
