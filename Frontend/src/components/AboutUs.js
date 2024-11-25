@@ -4,13 +4,11 @@ import React from 'react';
 const AboutUs = () => {
   return (
     <div className=" sm:p-6 sm:flex items-center mt-6 sm:flex-col">
-      <span className="text-lg text-gray-500 border-b-2 border-sky-600 uppercase tracking-wide">About Us</span>
-
       <div className=" sm:p-6 sm:flex items-center mt-6 sm:flex-row">
 
         <div className="sm:w-1/2 p-5">
           <div className="image object-center text-center">
-            <img className="rounded-lg shadow-lg transition-transform transform hover:scale-105 h-64 md:h-fit object-cover" src="images/DepartureStation.webp" alt="About Us" />
+            <img className="rounded-lg shadow-lg transition-transform transform hover:scale-105 h-fit sm:h-fit object-cover" src="images/DepartureStation.webp" alt="About Us" />
           </div>
         </div>
         <div className="sm:w-3/4 p-5">
@@ -36,7 +34,7 @@ const AboutUs = () => {
 
         <div className="sm:w-1/2 p-5">
           <div className="image object-center text-center">
-            <img className="rounded-lg shadow-lg transition-transform transform hover:scale-105 h-full sm:h-fit object-cover" src="images/team4.jpeg" alt="Team 4 InceptionU" />
+            <img className="rounded-lg shadow-lg transition-transform transform hover:scale-105 h-fit sm:h-fit object-cover" src="images/team4.jpeg" alt="Team 4 InceptionU" />
           </div>
         </div>
         <div className="sm:w-3/4 p-5">
