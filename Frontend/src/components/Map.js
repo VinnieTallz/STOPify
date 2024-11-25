@@ -106,6 +106,10 @@ const MainMap = () => {
             onBusStopSelect={setSelectedStopNumber}
             loading={loading}
             error={error}
+            onSelectedStopNumberChange={stopNumber => {
+              // Call a function in BusStopList to trigger the scroll, passing the stopNumber.
+              // This assumes you have a way to pass a function down to BusStopList.
+            }}
           />
         </div>
         <div className="flex flex-col md:flex-row h-full w-full md:w-2/3 shadow-lg ">
