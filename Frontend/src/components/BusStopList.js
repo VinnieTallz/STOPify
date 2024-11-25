@@ -110,7 +110,7 @@ const BusStopList = ({ busStops, selectedStopNumber, userDestination, setUserDes
       {/* Show message if no bus stops match the search query */}
       {noResultsFound && debouncedSearchQuery.trim() !== "" ? (
         <div className="text-center text-red-600 font-semibold">
-          No bus stop found for "{debouncedSearchQuery}"
+          
         </div>
       ) : (
         // <ul className="space-y-4 max-h-80 sm:max-h-full overflow-y-auto p-3">
