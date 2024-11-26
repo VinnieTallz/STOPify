@@ -153,6 +153,8 @@ const MainMap = () => {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             directions={busTimes}
+            setDirection={setBusTimes}
+            
           />
         </div>
         <div className="flex flex-col md:flex-row h-full w-full md:w-2/3 shadow-lg  ">

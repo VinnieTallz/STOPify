@@ -30,6 +30,8 @@ const BusStopList = ({
   directions,
   loading,
   error,
+  setDirection,
+  
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredBusStops, setFilteredBusStops] = useState(busStops);
@@ -93,7 +95,12 @@ const BusStopList = ({
   const handleSuggestionSelect = (suggestion) => {
     setSearchQuery(suggestion);
   };
-
+  const backToStopsNearMe =()=>{
+    setSearchQuery("");
+    setUserDestination(null);
+    setDirection([]);
+    onBusStopSelect(null);
+  }
   const scrollToTop = (stopNumber) => {
     if (!listRef.current) return;
 
@@ -140,10 +147,18 @@ const BusStopList = ({
     {/* Display directions if available */}
 {directions.length > 0 ? (
   <div className="direction-instructions bg-white p-4 rounded-lg">
+     <button
+      onClick={backToStopsNearMe}
+     className="text-sm text-sky-500"
+    >
+      Back
+    </button>
+
     <h3 className="text-lg text-center font-semibold mb-2 text-gray-700">
       Directions to {userDestination}
     </h3>
     <div className="space-y-4 p-3 h-full max-h-96 overflow-y-auto">
+
       {directions[0]?.steps.map((step, index) => {
         const travelMode = step.travel_mode;
         let icon;
