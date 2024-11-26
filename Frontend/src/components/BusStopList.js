@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import AutocompleteSuggestions from "./AutoCompleteSuggestions.js";
 import { useLayoutEffect } from "react"; // Import useLayoutEffect
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWalking, faBus } from '@fortawesome/free-solid-svg-icons';
 
 // Custom Hook for Debouncing
 const useDebounce = (value, delay) => {
@@ -69,7 +71,7 @@ const BusStopList = ({
   };
 
   const stepIcons = {
-    WALKING: "../../public/images/walk.svg",
+    WALKING: "../../public/images/person-walking-solid.svg",
     TRANSIT: "../../public/images/bus.svg",
     // DRIVING: "/path/to/car-icon.png",
   };
@@ -143,11 +145,18 @@ const BusStopList = ({
     <div className="space-y-4 p-3 h-full max-h-96 overflow-y-auto">
       {directions[0]?.steps.map((step, index) => {
         const travelMode = step.travel_mode;
-        const icon = stepIcons[travelMode] || stepIcons["WALKING"];
+        let icon;
+        if (travelMode === 'WALKING') {
+          icon = faWalking;
+        } else if (travelMode === 'TRANSIT') {
+          icon = faBus;  
+        } else {
+          icon = faWalking;
+        }
         return (
           <div key={index} className="px-3">
             <div className="flex items-center">
-              <img src={icon} alt={travelMode} className="w-6 h-6 mr-3" />
+            <FontAwesomeIcon icon={icon} className="text-xl mr-3" />
               <p>{`${step.instructions}`}</p>
             </div>
             <p>{`About: ${step.duration.text}`}</p>
