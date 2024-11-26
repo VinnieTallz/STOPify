@@ -170,6 +170,7 @@ const MainMap = () => {
                     selectedStopNumber={selectedStopNumber}
                     onMarkerClick={setSelectedStopNumber}
                     busTimes={busTimes}
+                    userDestination={userDestination}
                   />
                 </Map>
               </div>}
