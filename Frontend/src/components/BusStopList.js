@@ -69,7 +69,7 @@ const BusStopList = ({
   };
 
   const stepIcons = {
-    WALKING: "/path/to/walking-icon.png",
+    WALKING: "../../public/images/walk.svg",
     TRANSIT: "../../public/images/bus.svg",
     // DRIVING: "/path/to/car-icon.png",
   };
@@ -134,34 +134,31 @@ const BusStopList = ({
         setUserDestination={setUserDestination}
       />
 
-      {/* Display directions if available */}
-      {directions.length > 0 ? (
-        <div className="direction-instructions">
-          <h3 className="text-lg font-semibold mb-2 text-gray-700">
-            Directions to {userDestination}:
-          </h3>
-          <ul className="space-y-4 p-3 h-full max-h-96 overflow-y-auto">
-            {directions[0]?.steps.map((step, index) => {
-              const travelMode = step.travel_mode;
-              const icon = stepIcons[travelMode] || stepIcons["WALKING"];
-
-              return (
-                <li
-                  key={index}
-                  className="py-2 px-3 bg-gray-100 rounded-lg border"
-                >
-                  <div className="flex items-center">
-                    {/* Display icon for the step */}
-                    <img src={icon} alt={travelMode} className="w-6 h-6 mr-3" />
-                    <p>{`Step ${index + 1}: ${step.instructions}`}</p>
-                  </div>
-                  <p>{`Distance: ${step.distance.text}`}</p>
-                  <p>{`Duration: ${step.duration.text}`}</p>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+    {/* Display directions if available */}
+{directions.length > 0 ? (
+  <div className="direction-instructions bg-white p-4 rounded-lg">
+    <h3 className="text-lg text-center font-semibold mb-2 text-gray-700">
+      Directions to {userDestination}
+    </h3>
+    <div className="space-y-4 p-3 h-full max-h-96 overflow-y-auto">
+      {directions[0]?.steps.map((step, index) => {
+        const travelMode = step.travel_mode;
+        const icon = stepIcons[travelMode] || stepIcons["WALKING"];
+        return (
+          <div key={index} className="px-3">
+            <div className="flex items-center">
+              <img src={icon} alt={travelMode} className="w-6 h-6 mr-3" />
+              <p>{`${step.instructions}`}</p>
+            </div>
+            <p>{`About: ${step.duration.text}`}</p>
+            <p >{`Distance: ${step.distance.text}`}</p>
+    
+            <hr className="my-2 border-t-2 border-gray-300" />
+          </div>
+        );
+      })}
+    </div>
+    </div>
       ) : (
         <>
           {noResultsFound && debouncedSearchQuery.trim() !== "" ? (

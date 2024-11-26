@@ -48,12 +48,13 @@ const Directions = ({
         return;
       }
       const routeData = routes[0].legs[0];
-      // console.log('routedata',routeData);
+      console.log('routedata',routeData);
 
       const arrivalTime = routeData.arrival_time.text;
       const departureTime = routeData.departure_time.text;
       const duration = routeData.duration.text;
       const steps = routeData.steps;
+      
 
 
       const busTimes = [
