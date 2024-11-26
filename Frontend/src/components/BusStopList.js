@@ -126,7 +126,7 @@ const BusStopList = ({
     {directions.length > 0 ? (
       <div className="direction-instructions">
         <h3 className="text-lg font-semibold mb-2 text-gray-700">Directions to {userDestination}:</h3>
-        <ul className="space-y-4 p-3 h-full">
+        <ul className="space-y-4 p-3 h-full max-h-96 overflow-y-auto">
         {directions[0]?.steps.map((step, index) => {
           const travelMode = step.travel_mode; 
           const icon = stepIcons[travelMode] || stepIcons['WALKING']; 
