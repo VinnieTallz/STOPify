@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { InfoWindow, AdvancedMarker } from '@vis.gl/react-google-maps';
 
-const StopMarkers = ({ busStops, selectedStopNumber, onMarkerClick, busTimes }) => {
+const StopMarkers = ({ busStops, selectedStopNumber, onMarkerClick, busTimes, userDestination }) => {
+
   const [infoWindowOpen, setInfoWindowOpen] = useState(null);
   const [relevantBusTimes, setReleventBusTimes] = useState([]);
 
@@ -34,7 +35,7 @@ useEffect (() =>{
 // if (relevantBusTimes.length === 0) {
 //   console.log("No relevant bus times found for stop number", selectedStopNumber);
 // }
-
+if (userDestination){return}
 
   return busStops.map((busStop, index) => (
     <AdvancedMarker
