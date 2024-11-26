@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import AutocompleteSuggestions from "./AutoCompleteSuggestions.js";
-import { useLayoutEffect } from 'react'; // Import useLayoutEffect
-
+import { useLayoutEffect } from "react"; // Import useLayoutEffect
 
 // Custom Hook for Debouncing
 const useDebounce = (value, delay) => {
@@ -20,9 +19,16 @@ const useDebounce = (value, delay) => {
   return debouncedValue;
 };
 
-const BusStopList = ({ 
-  busStops, selectedStopNumber, userDestination,
-  setUserDestination, onBusStopSelect,directions, loading, error }) => {
+const BusStopList = ({
+  busStops,
+  selectedStopNumber,
+  userDestination,
+  setUserDestination,
+  onBusStopSelect,
+  directions,
+  loading,
+  error,
+}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredBusStops, setFilteredBusStops] = useState(busStops);
   const listRef = useRef(null);
@@ -36,11 +42,15 @@ const BusStopList = ({
     } else {
       const searchQueryLower = debouncedSearchQuery.toLowerCase().trim();
       const filteredStops = busStops.filter((stop) => {
-        const stopAddress = stop.stop_address ? stop.stop_address.toLowerCase() : '';
-        const routeName = stop.route_name ? stop.route_name.toLowerCase() : '';
-        const busNumber = stop.bus_number ? stop.bus_number.toLowerCase() : '';
-        const stopNumber = stop.stop_number ? stop.stop_number.toLowerCase() : '';
-        const community = stop.community ? stop.community.toLowerCase() : '';
+        const stopAddress = stop.stop_address
+          ? stop.stop_address.toLowerCase()
+          : "";
+        const routeName = stop.route_name ? stop.route_name.toLowerCase() : "";
+        const busNumber = stop.bus_number ? stop.bus_number.toLowerCase() : "";
+        const stopNumber = stop.stop_number
+          ? stop.stop_number.toLowerCase()
+          : "";
+        const community = stop.community ? stop.community.toLowerCase() : "";
 
         return (
           stopAddress.includes(searchQueryLower) ||
@@ -54,20 +64,18 @@ const BusStopList = ({
     }
   }, [debouncedSearchQuery, busStops]);
 
-
-
   const handleBusStopClick = (stopNumber) => {
     onBusStopSelect(stopNumber); // Always update to the clicked stop
   };
 
   const stepIcons = {
-    WALKING: "/path/to/walking-icon.png", 
-    TRANSIT: "/path/to/bus-icon.png", 
-    DRIVING: "/path/to/car-icon.png",
+    WALKING: "/path/to/walking-icon.png",
+    TRANSIT: "../../public/images/bus.svg",
+    // DRIVING: "/path/to/car-icon.png",
   };
 
   const relatedBusStops = selectedStopNumber
-    ? filteredBusStops.filter(stop => stop.stop_number === selectedStopNumber)
+    ? filteredBusStops.filter((stop) => stop.stop_number === selectedStopNumber)
     : [];
 
   const uniqueStopNumbers = filteredBusStops.reduce((acc, stop) => {
@@ -80,7 +88,6 @@ const BusStopList = ({
 
   const noResultsFound = filteredBusStops.length === 0;
 
-
   const handleSuggestionSelect = (suggestion) => {
     setSearchQuery(suggestion);
   };
@@ -91,16 +98,16 @@ const BusStopList = ({
     const selectedListItem = listItemRefs.current[stopNumber];
 
     if (selectedListItem) {
-      selectedListItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      selectedListItem.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
-  useLayoutEffect(() => {  // Replace useEffect with useLayoutEffect
+  useLayoutEffect(() => {
+    // Replace useEffect with useLayoutEffect
     if (selectedStopNumber) {
       scrollToTop(selectedStopNumber);
     }
   }, [selectedStopNumber]);
-
 
   if (loading) {
     return <div>Loading your location and bus stops nearby..</div>;
@@ -120,80 +127,93 @@ const BusStopList = ({
         onChange={(e) => setSearchQuery(e.target.value)}
       /> */}
 
-      <AutocompleteSuggestions input={searchQuery} onSuggestionSelect={handleSuggestionSelect} userDestination={userDestination} setUserDestination={setUserDestination} />
+      <AutocompleteSuggestions
+        input={searchQuery}
+        onSuggestionSelect={handleSuggestionSelect}
+        userDestination={userDestination}
+        setUserDestination={setUserDestination}
+      />
 
-    {/* Display directions if available */}
-    {directions.length > 0 ? (
-      <div className="direction-instructions">
-        <h3 className="text-lg font-semibold mb-2 text-gray-700">Directions to {userDestination}:</h3>
-        <ul className="space-y-4 p-3 h-full max-h-96 overflow-y-auto">
-        {directions[0]?.steps.map((step, index) => {
-          const travelMode = step.travel_mode; 
-          const icon = stepIcons[travelMode] || stepIcons['WALKING']; 
+      {/* Display directions if available */}
+      {directions.length > 0 ? (
+        <div className="direction-instructions">
+          <h3 className="text-lg font-semibold mb-2 text-gray-700">
+            Directions to {userDestination}:
+          </h3>
+          <ul className="space-y-4 p-3 h-full max-h-96 overflow-y-auto">
+            {directions[0]?.steps.map((step, index) => {
+              const travelMode = step.travel_mode;
+              const icon = stepIcons[travelMode] || stepIcons["WALKING"];
 
-          return (
-            <li key={index} className="py-2 px-3 bg-gray-100 rounded-lg border">
-              <div className="flex items-center">
-                {/* Display icon for the step */}
-                <img src={icon} alt={travelMode} className="w-6 h-6 mr-3" />
-                <p>{`Step ${index + 1}: ${step.instructions}`}</p>
-              </div>
-              <p>{`Distance: ${step.distance.text}`}</p>
-              <p>{`Duration: ${step.duration.text}`}</p>
-            </li>
-          );
-        })}
-      </ul>
-      </div>
-    ) : (
-      <>
-       
-      {noResultsFound && debouncedSearchQuery.trim() !== "" ? (
-        <div className="text-center text-red-600 font-semibold">
-          No bus stops found for your search.
+              return (
+                <li
+                  key={index}
+                  className="py-2 px-3 bg-gray-100 rounded-lg border"
+                >
+                  <div className="flex items-center">
+                    {/* Display icon for the step */}
+                    <img src={icon} alt={travelMode} className="w-6 h-6 mr-3" />
+                    <p>{`Step ${index + 1}: ${step.instructions}`}</p>
+                  </div>
+                  <p>{`Distance: ${step.distance.text}`}</p>
+                  <p>{`Duration: ${step.duration.text}`}</p>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       ) : (
-        <ul ref={listRef} className="space-y-4 overflow-y-auto p-3 h-full">
-          {Object.entries(uniqueStopNumbers).map(([stopNumber, stops]) => (
-            <li
-              key={stopNumber}
-              ref={el => (listItemRefs.current[stopNumber] = el)}  // Assign ref to each list item
-              className={`cursor-pointer border-b-2 hover:bg-gray-200 hover:p-2 hover:rounded-lg transition-all py-1 h-auto ${stopNumber === selectedStopNumber ? 'bg-blue-100 p-4 rounded-lg' : ''}`}
-              onClick={() => handleBusStopClick(stopNumber)}
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-800 font-medium mr-4">
-                  {stopNumber}
-                </span>
-                <span className="text-l font-medium text-gray-800 mr-4">
-                  {stops[0]?.stop_address}
-                </span>
-                <span className="text-sm text-sky-500">Details</span>
-              </div>
+        <>
+          {noResultsFound && debouncedSearchQuery.trim() !== "" ? (
+            <div className="text-center text-red-600 font-semibold">
+              No bus stops found for your search.
+            </div>
+          ) : (
+            <ul ref={listRef} className="space-y-4 overflow-y-auto p-3 h-full">
+              {Object.entries(uniqueStopNumbers).map(([stopNumber, stops]) => (
+                <li
+                  key={stopNumber}
+                  ref={(el) => (listItemRefs.current[stopNumber] = el)} // Assign ref to each list item
+                  className={`cursor-pointer border-b-2 hover:bg-gray-200 hover:p-2 hover:rounded-lg transition-all py-1 h-auto ${
+                    stopNumber === selectedStopNumber
+                      ? "bg-blue-100 p-4 rounded-lg"
+                      : ""
+                  }`}
+                  onClick={() => handleBusStopClick(stopNumber)}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-800 font-medium mr-4">
+                      {stopNumber}
+                    </span>
+                    <span className="text-l font-medium text-gray-800 mr-4">
+                      {stops[0]?.stop_address}
+                    </span>
+                    <span className="text-sm text-sky-500">Details</span>
+                  </div>
 
-              {selectedStopNumber === stopNumber && (
-                <div className="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-md h-60 overflow-y-auto">
-                  <h3 className="text-lg font-semibold mb-2 text-gray-700">
-                    Bus Stop {stopNumber} Details:
-                  </h3>
-                  {stops.map((stop) => (
-                    <div key={stop._id} className="mb-4">
-                      <p className="text-gray-600">
-                        Bus No.: <strong>{stop.bus_number}</strong>
-                      </p>
-                      <p className="text-gray-600">
-                        Community: <strong>{stop.community}</strong>
-                      </p>
+                  {selectedStopNumber === stopNumber && (
+                    <div className="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-md h-60 overflow-y-auto">
+                      <h3 className="text-lg font-semibold mb-2 text-gray-700">
+                        Bus Stop {stopNumber} Details:
+                      </h3>
+                      {stops.map((stop) => (
+                        <div key={stop._id} className="mb-4">
+                          <p className="text-gray-600">
+                            Bus No.: <strong>{stop.bus_number}</strong>
+                          </p>
+                          <p className="text-gray-600">
+                            Community: <strong>{stop.community}</strong>
+                          </p>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
       )}
-      </>
-    )}
     </div>
   );
 };
