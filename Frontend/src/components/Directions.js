@@ -22,12 +22,11 @@ const Directions = ({
     },
     [routesLibrary, map]
   );
-  console.log(userLocation.lat);
-  console.log(userLocation.lng);
+  console.log("STOPify 2024");
 
   useEffect(
     () => {
-      if (!directionsRenderer | !directionsService) return;
+      if (!directionsRenderer | !directionsService | !userDestination) return;
 
       directionsService
         .route({
@@ -42,7 +41,7 @@ const Directions = ({
     },
     [directionsService, directionsRenderer, userDestination]
   );
-  console.log(userDestination);
+
   useEffect(
     () => {
       if (routes.length == 0) {
