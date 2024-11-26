@@ -5,7 +5,8 @@ const AutocompleteSuggestions = ({
   input,
   userDestination,
   setUserDestination,
-  onSuggestionSelect
+  onSuggestionSelect,
+  setSearchQuery
 }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [sessionToken, setSessionToken] = useState(null);
@@ -82,7 +83,10 @@ const AutocompleteSuggestions = ({
         <div
           key={index}
           className="suggestion-item"
-          onClick={() => setUserDestination(suggestion.description)}
+          onClick={() => {
+            setUserDestination(suggestion.description);
+            setSearchQuery("");
+          }}
         >
           {suggestion.description}
         </div>

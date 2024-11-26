@@ -117,6 +117,7 @@ const MainMap = () => {
             onSuggestionSelect={handleSuggestionSelect}
             userDestination={userDestination}
             setUserDestination={setUserDestination}
+            setSearchQuery={setSearchQuery}
           />
           <h1 className="text-3xl font-semibold mb-4 text-center">
             Stops Near Me
