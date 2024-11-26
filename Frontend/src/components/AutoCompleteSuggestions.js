@@ -3,9 +3,7 @@ import React, { useState, useEffect } from "react";
 /* global google */
 const AutocompleteSuggestions = ({
   input,
-  // userDestination,
   setUserDestination,
-  // onSuggestionSelect,
   setSearchQuery,
 }) => {
   const [suggestions, setSuggestions] = useState([]);
@@ -73,6 +71,13 @@ const AutocompleteSuggestions = ({
     fetchSuggestions();
   }, [input, sessionToken]);
 
+  const formatSecondaryText = (secondaryText) => {
+    // Split the secondary text by commas and return only the first part
+    if (!secondaryText) return "";
+    const parts = secondaryText.split(","); // Split by commas
+    return parts[0]?.trim() || ""; // Return only the street address part
+  };
+
   return (
     <div className="autocomplete-suggestions">
       {suggestions.map((suggestion, index) => (
@@ -84,7 +89,8 @@ const AutocompleteSuggestions = ({
             setSearchQuery("");
           }}
         >
-          {suggestion.description}
+          <strong>{suggestion.structured_formatting.main_text}</strong>{" "}
+          {formatSecondaryText(suggestion.structured_formatting.secondary_text)}
         </div>
       ))}
     </div>
