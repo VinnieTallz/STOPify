@@ -20,7 +20,9 @@ const useDebounce = (value, delay) => {
   return debouncedValue;
 };
 
-const BusStopList = ({ busStops, selectedStopNumber, userDestination, setUserDestination, onBusStopSelect, loading, error }) => {
+const BusStopList = ({ 
+  busStops, selectedStopNumber, userDestination,
+  setUserDestination, onBusStopSelect,directions, loading, error }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredBusStops, setFilteredBusStops] = useState(busStops);
   const listRef = useRef(null);
@@ -58,6 +60,11 @@ const BusStopList = ({ busStops, selectedStopNumber, userDestination, setUserDes
     onBusStopSelect(stopNumber); // Always update to the clicked stop
   };
 
+  const stepIcons = {
+    WALKING: "/path/to/walking-icon.png", 
+    TRANSIT: "/path/to/bus-icon.png", 
+    DRIVING: "/path/to/car-icon.png",
+  };
 
   const relatedBusStops = selectedStopNumber
     ? filteredBusStops.filter(stop => stop.stop_number === selectedStopNumber)
@@ -105,9 +112,6 @@ const BusStopList = ({ busStops, selectedStopNumber, userDestination, setUserDes
 
   return (
     <div className="max-w-4xl mx-auto pt-0 px-2 mx-4 rounded-t-lg sm:h-max-content sm:rounded-l-lg overflow-hidden">
-
-
-
       {/* <input
         type="text"
         placeholder="Search for your destination.."
@@ -118,7 +122,32 @@ const BusStopList = ({ busStops, selectedStopNumber, userDestination, setUserDes
 
       <AutocompleteSuggestions input={searchQuery} onSuggestionSelect={handleSuggestionSelect} userDestination={userDestination} setUserDestination={setUserDestination} />
 
+    {/* Display directions if available */}
+    {directions.length > 0 ? (
+      <div className="direction-instructions">
+        <h3 className="text-lg font-semibold mb-2 text-gray-700">Directions to {userDestination}:</h3>
+        <ul className="space-y-4 p-3 h-full">
+        {directions[0]?.steps.map((step, index) => {
+          const travelMode = step.travel_mode; 
+          const icon = stepIcons[travelMode] || stepIcons['WALKING']; 
 
+          return (
+            <li key={index} className="py-2 px-3 bg-gray-100 rounded-lg border">
+              <div className="flex items-center">
+                {/* Display icon for the step */}
+                <img src={icon} alt={travelMode} className="w-6 h-6 mr-3" />
+                <p>{`Step ${index + 1}: ${step.instructions}`}</p>
+              </div>
+              <p>{`Distance: ${step.distance.text}`}</p>
+              <p>{`Duration: ${step.duration.text}`}</p>
+            </li>
+          );
+        })}
+      </ul>
+      </div>
+    ) : (
+      <>
+       
       {noResultsFound && debouncedSearchQuery.trim() !== "" ? (
         <div className="text-center text-red-600 font-semibold">
           No bus stops found for your search.
@@ -163,6 +192,8 @@ const BusStopList = ({ busStops, selectedStopNumber, userDestination, setUserDes
           ))}
         </ul>
       )}
+      </>
+    )}
     </div>
   );
 };
