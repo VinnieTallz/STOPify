@@ -122,15 +122,15 @@ const MainMap = () => {
   return (
     <div className="h-full w-full">
       <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]" >
-        <div className="flex flex-col w-full shadow-lg sm:w-1/2 mb-1 px-5 rounded-lg" >
-        <h1 className="text-3xl font-semibold my-4 text-center">
+        <div className="flex flex-col w-full shadow-lg sm:w-1/2 px-5 rounded-lg" >
+          <h1 className="text-3xl font-semibold my-4 text-center">
             Stops Near Me
           </h1>
           <input // Search input
             type="text"
             placeholder="Search for your destination.."
             className="shadow-md rounded-lg p-2 mb-5 mx-auto w-full focus:outline-none focus:ring-1 focus:ring-sky-500"
-            style={{ width: '400px' }} 
+            style={{ width: '90%' }}
             value={searchQuery} // Correctly use searchQuery
             onChange={(e) => setSearchQuery(e.target.value)} // Correctly use setSearchQuery
           />
@@ -141,7 +141,7 @@ const MainMap = () => {
             setUserDestination={setUserDestination}
             setSearchQuery={setSearchQuery}
           />
-         
+
           <BustStopList
             busStops={busStops}
             userDestination={userDestination}
