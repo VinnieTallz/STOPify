@@ -43,6 +43,11 @@ const AutocompleteSuggestions = ({
         radius: 50000, // 50 km radius
         sessionToken,
         componentRestrictions: { country: "ca" }, // Restrict to Canada
+        locationBias: calgaryLatLng, // Use locationBias instead of location
+        locationRestriction: new google.maps.LatLngBounds( // Add locationRestriction
+          new google.maps.LatLng(51.0, -114.2), // South-West bounds
+          new google.maps.LatLng(51.2, -113.8) // North-East bounds
+        ),
       };
 
       try {
