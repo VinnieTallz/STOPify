@@ -120,7 +120,8 @@ const BusStopList = ({
   }
 
   return (
-    <div className="max-w-4xl mx-auto pt-0 px-2 mx-4 rounded-t-lg sm:h-max-content sm:rounded-l-lg overflow-hidden">
+<div className="max-w-4xl mx-auto pt-0 px-2 mx-4 rounded-t-lg sm:h-max-content sm:rounded-l-lg overflow-hidden w-full mx-w-[500px]">
+
       {/* <input
         type="text"
         placeholder="Search for your destination.."

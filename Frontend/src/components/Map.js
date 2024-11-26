@@ -121,12 +121,16 @@ const MainMap = () => {
 
   return (
     <div className="h-full w-full">
-      <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]">
-        <div className="flex flex-col w-full shadow-lg sm:w-1/2 mb-1 ">
+      <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]" >
+        <div className="flex flex-col w-full shadow-lg sm:w-1/2 mb-1 px-5 rounded-lg" >
+        <h1 className="text-3xl font-semibold my-4 text-center">
+            Stops Near Me
+          </h1>
           <input // Search input
             type="text"
             placeholder="Search for your destination.."
-            className="shadow-md rounded-lg p-2 mb-5 w-full focus:outline-none focus:ring-1 focus:ring-sky-500"
+            className="shadow-md rounded-lg p-2 mb-5 mx-auto w-full focus:outline-none focus:ring-1 focus:ring-sky-500"
+            style={{ width: '400px' }} 
             value={searchQuery} // Correctly use searchQuery
             onChange={(e) => setSearchQuery(e.target.value)} // Correctly use setSearchQuery
           />
@@ -137,9 +141,7 @@ const MainMap = () => {
             setUserDestination={setUserDestination}
             setSearchQuery={setSearchQuery}
           />
-          <h1 className="text-3xl font-semibold mb-4 text-center">
-            Stops Near Me
-          </h1>
+         
           <BustStopList
             busStops={busStops}
             userDestination={userDestination}
@@ -153,10 +155,10 @@ const MainMap = () => {
             directions={busTimes}
           />
         </div>
-        <div className="flex flex-col md:flex-row h-full w-full md:w-2/3 shadow-lg ">
+        <div className="flex flex-col md:flex-row h-full w-full md:w-2/3 shadow-lg  ">
           <APIProvider apiKey={mapKey} onLoad={() => console.log("API Loaded")}>
             {userLocation && ( // Render the map when userLocation is available
-              <div className="rounded-t-lg sm:rounded-r-lg overflow-hidden w-full h-[400px] sm:h-full">
+              <div className="rounded-t-lg rounded-b-lg shadow-lg sm:rounded-r-lg overflow-hidden w-full h-[400px] sm:h-full">
                 <Map
                   className="w-full h-full"
                   defaultZoom={15}

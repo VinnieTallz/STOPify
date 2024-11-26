@@ -84,7 +84,7 @@ const AutocompleteSuggestions = ({
   };
 
   return (
-    <div className="autocomplete-suggestions">
+    <div className="autocomplete-suggestions bg-white rounded-lg">
       {suggestions.map((suggestion, index) => (
         <div
           key={index}
