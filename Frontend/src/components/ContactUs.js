@@ -80,7 +80,7 @@ const Contact = () => {
                       </svg>
                     </div>
                     <h2 className="text-2xl font-bold mb-2">Thank You!</h2>
-                    <p className="text-gray-600 mb-4 text-center">Your Details has been Succesfully Submitted. Thanks!</p>
+                    <p className="text-gray-600 mb-4 text-center">Your message has been Succesfully Submitted. Thanks!</p>
                     <button onClick={closePopup} className="w-full sm:w-40 bg-sky-500 text-white px-6 py-2 rounded-md hover:bg-sky-900 transition duration-200">OK</button>
                   </div>
                 </div>
