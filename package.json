@@ -12,7 +12,7 @@
     "build": "npm run build:Frontend",
     "start:Backend": "cd Backend && npm start && cd ..",
     "start:Frontend": "cd Frontend && npm start && cd ..",
-    "start": "npm run start:Frontend && npm run start:Backend"
+    "start": "concurrently  \"npm run start:Frontend\" \"npm run start:Backend\""
   },
   "author": "",
   "license": "ISC",
