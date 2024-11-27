@@ -28,7 +28,7 @@ const MainMap = () => {
       const radius = 5000;
       try {
         const response = await fetch(
-          `http://localhost:3000/api/busStops/nearby?lat=${lat}&lng=${lng}&radius=${radius}`
+          `http://localhost:10000/api/busStops/nearby?lat=${lat}&lng=${lng}&radius=${radius}`
         );
 
         if (response.status === 200) {
@@ -54,17 +54,17 @@ const MainMap = () => {
     // Get user location and fetch bus stops
     const getUserLocation = () => {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        position => {
           if (!isMounted) return;
 
           const location = {
             lat: position.coords.latitude,
-            lng: position.coords.longitude,
+            lng: position.coords.longitude
           };
           setUserLocation(location);
           fetchBusStops(location.lat, location.lng);
         },
-        (error) => {
+        error => {
           if (!isMounted) return;
 
           console.error("Error getting user location:", error);
@@ -77,18 +77,21 @@ const MainMap = () => {
     getUserLocation();
   }, []);
 
-  useEffect(() => {
-    if (selectedStopNumber !== null) {
-      const details = busStops.find(
-        (stop) => stop.stop_number === selectedStopNumber
-      );
-      setSelectedStopDetails(details);
-    } else {
-      setSelectedStopDetails(null);
-    }
-  }, [selectedStopNumber, busStops]);
+  useEffect(
+    () => {
+      if (selectedStopNumber !== null) {
+        const details = busStops.find(
+          stop => stop.stop_number === selectedStopNumber
+        );
+        setSelectedStopDetails(details);
+      } else {
+        setSelectedStopDetails(null);
+      }
+    },
+    [selectedStopNumber, busStops]
+  );
 
-  const handleDirectionsResponse = (busTimes) => {
+  const handleDirectionsResponse = busTimes => {
     if (Array.isArray(busTimes)) {
       setBusTimes(busTimes);
     } else {
@@ -102,13 +105,13 @@ const MainMap = () => {
   // };
 
   // Handle selection of a suggestion from autocomplete
-  const handleSuggestionSelect = (suggestion) => {
+  const handleSuggestionSelect = suggestion => {
     setUserDestination(suggestion);
     setSearchQuery(suggestion.description);
   };
 
   // Handle input change with city prefix
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     let value = e.target.value;
 
     // Add the prefix if the input doesn't start with it
@@ -121,8 +124,8 @@ const MainMap = () => {
 
   return (
     <div className="h-full w-full">
-      <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]" >
-        <div className="flex flex-col w-full shadow-lg sm:w-1/2 px-5 rounded-lg" >
+      <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]">
+        <div className="flex flex-col w-full shadow-lg sm:w-1/2 px-5 rounded-lg">
           <h1 className="text-3xl font-semibold my-4 text-center">
             Stops Near Me
           </h1>
@@ -130,9 +133,9 @@ const MainMap = () => {
             type="text"
             placeholder="Search for your destination.."
             className="shadow-md rounded-lg p-2 mb-5 mx-auto w-full focus:outline-none focus:ring-1 focus:ring-sky-500"
-            style={{ width: '90%' }}
+            style={{ width: "90%" }}
             value={searchQuery} // Correctly use searchQuery
-            onChange={(e) => setSearchQuery(e.target.value)} // Correctly use setSearchQuery
+            onChange={e => setSearchQuery(e.target.value)} // Correctly use setSearchQuery
           />
           <AutocompleteSuggestions
             input={searchQuery}
@@ -154,12 +157,11 @@ const MainMap = () => {
             setSearchQuery={setSearchQuery}
             directions={busTimes}
             setDirection={setBusTimes}
-            
           />
         </div>
         <div className="flex flex-col md:flex-row h-full w-full md:w-2/3 shadow-lg  ">
           <APIProvider apiKey={mapKey} onLoad={() => console.log("API Loaded")}>
-            {userLocation && ( // Render the map when userLocation is available
+            {userLocation && // Render the map when userLocation is available
               <div className="rounded-t-lg rounded-b-lg shadow-lg sm:rounded-r-lg overflow-hidden w-full h-[400px] sm:h-full">
                 <Map
                   className="w-full h-full"
@@ -196,8 +198,7 @@ const MainMap = () => {
                     userDestination={userDestination}
                   />
                 </Map>
-              </div>
-            )}
+              </div>}
           </APIProvider>
         </div>
       </div>
