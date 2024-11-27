@@ -144,14 +144,16 @@ const BusStopList = ({
       />
 
     {/* Display directions if available */}
-   {directions.length > 0 && userDestination !== null ? (
-  <div className="direction-instructions bg-white p-4 rounded-lg">
-     <button
-      onClick={backToStopsNearMe}
-     className="text-sm text-sky-500"
-    >
-      Back
-    </button>
+    {directions.length > 0 && userDestination !== null ? (
+  <div className="direction-instructions bg-white p-4 rounded-lg ">
+    <div className="flex justify-end mr-4 mb-2">
+        <button
+          onClick={backToStopsNearMe}
+          className="text-sm text-sky-500"
+        >
+          Back
+        </button>
+    </div>
 
     <h3 className="text-lg text-center font-semibold mb-2 text-gray-700">
       Directions to {userDestination}
