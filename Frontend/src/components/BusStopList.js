@@ -30,8 +30,7 @@ const BusStopList = ({
   directions,
   loading,
   error,
-  setDirection,
-  
+  setDirection,  
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredBusStops, setFilteredBusStops] = useState(busStops);
@@ -68,15 +67,6 @@ const BusStopList = ({
     }
   }, [debouncedSearchQuery, busStops]);
 
-  const handleBusStopClick = (stopNumber) => {
-    onBusStopSelect(stopNumber); // Always update to the clicked stop
-  };
-
-  const stepIcons = {
-    WALKING: "../../public/images/person-walking-solid.svg",
-    TRANSIT: "../../public/images/bus.svg",
-    // DRIVING: "/path/to/car-icon.png",
-  };
 
   const relatedBusStops = selectedStopNumber
     ? filteredBusStops.filter((stop) => stop.stop_number === selectedStopNumber)
@@ -95,12 +85,21 @@ const BusStopList = ({
   const handleSuggestionSelect = (suggestion) => {
     setSearchQuery(suggestion);
   };
+
+
   const backToStopsNearMe =()=>{
     setSearchQuery("");
     setUserDestination(null);
     setDirection([]);
     onBusStopSelect(null);
   }
+
+  const handleBusStopClick = (stopNumber) => {
+    onBusStopSelect(stopNumber);
+    setUserDestination(null);
+    setDirection([]);
+  };
+
   const scrollToTop = (stopNumber) => {
     if (!listRef.current) return;
 
@@ -145,7 +144,7 @@ const BusStopList = ({
       />
 
     {/* Display directions if available */}
-{directions.length > 0 ? (
+   {directions.length > 0 && userDestination !== null ? (
   <div className="direction-instructions bg-white p-4 rounded-lg">
      <button
       onClick={backToStopsNearMe}
@@ -178,9 +177,8 @@ const BusStopList = ({
             <p>{`About: ${step.duration.text}`}</p>
             <p >{`Distance: ${step.distance.text}`}</p>
             {step.transit?.departure_time?.text && (
-  <p>{`Departure: ${step.transit.departure_time.text}`}</p>
-)}
-    
+            <p>{`Departure: ${step.transit.departure_time.text}`}</p>
+          )}
             <hr className="my-2 border-t-2 border-gray-300" />
           </div>
         );
