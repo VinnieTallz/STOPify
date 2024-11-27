@@ -28,7 +28,7 @@ const MainMap = () => {
       const radius = 5000;
       try {
         const response = await fetch(
-          `http://localhost:10000/api/busStops/nearby?lat=${lat}&lng=${lng}&radius=${radius}`
+          `http://https://stopify-gha7.onrender.com//api/busStops/nearby?lat=${lat}&lng=${lng}&radius=${radius}`
         );
 
         if (response.status === 200) {
