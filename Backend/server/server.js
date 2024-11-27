@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import showRequests from "./showRequests.js";
 import BusStopController from "./transitStops/BusStopController.js";
-import RouteLineController from "./routeLines/RouteLineController.js";
+import RouteLineController from "./routeLines/routeLineController.js";
 import MergedRoutesController from "./mergedRoutes/mergedRoutesController.js";
 
 dotenv.config(); // Load environment variables from .env file
