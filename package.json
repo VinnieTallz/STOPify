@@ -11,8 +11,12 @@
     "build:Frontend": "cd Frontend && npm run build && cd ..",
     "build": "npm run build:Frontend",
     "start:Backend": "cd Backend && npm start && cd ..",
-    "start": "npm run start:Backend"
+    "start:Frontend": "cd Frontend && npm start && cd ..",
+    "start": "concurrently \"npm run start:Backend\" \"npm run start:Frontend\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.1.0"
+  }
 }
