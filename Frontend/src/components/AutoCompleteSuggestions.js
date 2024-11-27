@@ -39,14 +39,14 @@ const AutocompleteSuggestions = ({
 
       const request = {
         input,
-        location: calgaryLatLng,
-        radius: 50000, // 50 km radius
+        //location: calgaryLatLng,
+       // radius: 50000, // 50 km radius
         sessionToken,
         componentRestrictions: { country: "ca" }, // Restrict to Canada
         locationBias: calgaryLatLng, // Use locationBias instead of location
         locationRestriction: new google.maps.LatLngBounds( // Add locationRestriction
-          new google.maps.LatLng(51.0, -114.2), // South-West bounds
-          new google.maps.LatLng(51.2, -113.8) // North-East bounds
+          new google.maps.LatLng(50.821810, -114.270563), // South-West bounds
+          new google.maps.LatLng(51.317888, -113.802511) // North-East bounds
         ),
       };
 

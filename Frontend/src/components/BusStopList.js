@@ -177,6 +177,9 @@ const BusStopList = ({
             </div>
             <p>{`About: ${step.duration.text}`}</p>
             <p >{`Distance: ${step.distance.text}`}</p>
+            {step.transit?.departure_time?.text && (
+  <p>{`Departure: ${step.transit.departure_time.text}`}</p>
+)}
     
             <hr className="my-2 border-t-2 border-gray-300" />
           </div>
