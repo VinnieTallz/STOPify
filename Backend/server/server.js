@@ -18,7 +18,7 @@ app.use("/api/routeLines", RouteLineController);
 app.use("/api/busStops", BusStopController);
 app.use("/api/mergedRoutes", MergedRoutesController);
 
-app.use(express.static("../public_html"));
+app.use(express.static("../../Frontend/build"));
 app.use(showRequests);
 
 // Start Server
