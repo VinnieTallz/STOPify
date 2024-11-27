@@ -8,7 +8,7 @@ import MergedRoutesController from "./mergedRoutes/mergedRoutesController.js";
 
 dotenv.config(); // Load environment variables from .env file
 
-const port = process.env.PORT || 3000;
+const port = 3000;
 const app = express();
 
 app.use(express.json());
