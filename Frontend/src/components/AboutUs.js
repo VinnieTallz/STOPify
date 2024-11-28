@@ -3,18 +3,18 @@ import React from 'react';
 
 const AboutUs = () => {
   return (
-    <div className=" sm:p-6 sm:flex items-center mt-6 sm:flex-col">
-      <div className=" sm:p-6 sm:flex items-center mt-6 sm:flex-row">
+    <div className=" sm:p-6 sm:flex items-center  sm:flex-col">
+      <div className=" sm:p-6 sm:flex items-center  sm:flex-row">
 
-        <div className="sm:w-1/2 p-5">
+        <div className="sm:w-1/2 px-3">
           <div className="image object-center text-center">
             <img className="rounded-lg shadow-lg transition-transform transform hover:scale-105 h-fit sm:h-fit object-cover" src="images/DepartureStation.webp" alt="About Us" />
           </div>
         </div>
-        <div className="sm:w-3/4 p-5">
+        <div className="sm:w-3/4 px-3">
           <div className="text">
 
-            <h2 className="my-4 font-bold text-3xl sm:text-4xl">
+            <h2 className="mb-4 font-bold text-3xl sm:text-4xl">
               About <span className="text-sky-500">Our Website</span>
             </h2>
             <p className=" text-xl text-gray-700 leading-relaxed">
@@ -30,16 +30,16 @@ const AboutUs = () => {
 
       </div>
 
-      <div className=" sm:p-6 sm:flex items-center mt-6 sm:flex-row-reverse">
+      <div className=" sm:p-6 sm:flex items-center sm:flex-row-reverse">
 
-        <div className="sm:w-1/2 p-5">
+        <div className="sm:w-1/2 px-3">
           <div className="image object-center text-center">
             <img className="rounded-lg shadow-lg transition-transform transform hover:scale-105 h-fit sm:h-fit object-cover" src="images/team4.jpeg" alt="Team 4 InceptionU" />
           </div>
         </div>
-        <div className="sm:w-3/4 p-5">
+        <div className="sm:w-3/4 px-3">
           <div className="text">
-            <h2 className="my-4 font-bold text-3xl sm:text-4xl">
+            <h2 className="mb-4 font-bold text-3xl sm:text-4xl">
               About <span className="text-sky-500">Our Team</span>
             </h2>
             <p className="text-xl text-gray-700 leading-relaxed">

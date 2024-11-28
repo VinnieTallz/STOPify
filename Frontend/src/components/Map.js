@@ -123,7 +123,7 @@ const MainMap = () => {
   };
 
   return (
-    <div className="h-full w-full">
+    <div className="my-3 h-full w-full">
       <div className="flex flex-col-reverse h-full w-full sm:flex-row sm:h-[600px]">
         <div className="flex flex-col w-full shadow-lg sm:w-1/2 px-5 rounded-lg">
           <h1 className="text-3xl font-semibold my-4 text-center">
